@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+html {
+    background: #fff url('imagens/background.jpg') no-repeat fixed 0% 100%;
+    /* background-color: #fff;
+    background-image: url('imagens/background.jpg');
+    background-repeat: no-repeat; por padrão o background é repetido
+    background-attachment: fixed;  define se ele vai rolar ou não com a página 
+    background-position: 0% 100%;  largura x altura em relação ao elemento pai.*/
+    background-size: cover; /* a imagem ocupa todo o elemento */
+    height: 90%;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    color: rgb(255, 255, 255);
+    height: 90%;
+}
+
+h1 {
+    font-size: 1em;
+    padding-left: 40px;
+}
+
+/* Bloco que reúne tudo (kdb, span, div) */
+.teclado {
+    display: flex;
+    flex: 1 1 0; /* Como deixar todas do mesmo tamanho? */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 70%;
+}
+
+kbd {
+    font-size: 2em;
+}
+
+/* Bloco composto pela letra e nome. */
+.tecla {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.221);
+    box-shadow: 0px 0px 2px 2px #fff;
+    text-shadow: 1px 1px 2px black;
+    margin: 10px;
+    transition: all .07s ease;
+}
+
+.som {
+    display: block;
+    color: red;
+    font-size: 0.8em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.tocando {
+    transform: scale(1.1);
+    border-color: #962220;
+    box-shadow: 0 0 1rem #962220;
+}
+
+

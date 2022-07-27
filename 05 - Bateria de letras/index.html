@@ -1,0 +1,84 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bateria de Letras</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Sem a música, a vida seria um erro.</h1>
+
+    <div class="teclado">
+        <div data-letra="65" class="tecla"> <!-- código encontrado no site keycode.info -->
+            <kbd>A</kbd>
+            <span class="som">batuque</span>
+        </div>
+        <div data-letra="83" class="tecla"> <!-- código encontrado no site keycode.info -->
+            <kbd>S</kbd>
+            <span class="som">chimbal</span>
+        </div>
+        <div data-letra="68" class="tecla"> <!-- código encontrado no site keycode.info -->
+            <kbd>D</kbd>
+            <span class="som">pedal</span>
+        </div>
+        <div data-letra="70" class="tecla"> <!-- código encontrado no site keycode.info -->
+            <kbd>F</kbd>
+            <span class="som">tambor</span>
+        </div>
+        <div data-letra="71" class="tecla"> <!-- código encontrado no site keycode.info -->
+            <kbd>G</kbd>
+            <span class="som">bumbo</span>
+        </div>
+        <div data-letra="72" class="tecla"> <!-- código encontrado no site keycode.info -->
+            <kbd>H</kbd>
+            <span class="som">prato</span>
+        </div>
+        <div data-letra="74" class="tecla"> <!-- código encontrado no site keycode.info -->
+            <kbd>J</kbd>
+            <span class="som">caixa</span>
+        </div>
+        <div data-letra="75" class="tecla"> <!-- código encontrado no site keycode.info -->
+            <kbd>K</kbd>
+            <span class="som">surdo</span>
+        </div>
+        <div data-letra="76" class="tecla"> <!-- código encontrado no site keycode.info -->
+            <kbd>L</kbd>
+            <span class="som">tilintar</span>
+        </div>
+    </div>
+
+    <audio data-letra="65" src="audio/clap.wav"></audio>
+    <audio data-letra="83" src="audio/hihat.wav"></audio>
+    <audio data-letra="68" src="audio/kick.wav"></audio>
+    <audio data-letra="70" src="audio/openhat.wav"></audio>
+    <audio data-letra="71" src="audio/boom.wav"></audio>
+    <audio data-letra="72" src="audio/ride.wav"></audio>
+    <audio data-letra="74" src="audio/snare.wav"></audio>
+    <audio data-letra="75" src="audio/tom.wav"></audio>
+    <audio data-letra="76" src="audio/tink.wav"></audio>
+
+    <script>
+        window.addEventListener('keydown', function(e) {
+            const audio = document.querySelector(`audio[data-letra="${e.keyCode}"]`);
+            const tecla = document.querySelector(`.tecla[data-letra="${e.keyCode}"]`);
+            // console.log(e.keyCode); //  mostra o código da tecla no console. 
+            if (!audio) return;
+            audio.currentTime = 0;     
+            audio.play();
+            tecla.classList.add(`tocando`);
+            
+            // Essa parte é diferente do que o Wes Bos fez, mas funciona da mesma forma. Achei mais elegante assim.
+            window.addEventListener('keyup', function(e) {
+                if (!audio) return;
+                tecla.classList.remove(`tocando`);
+            })
+        });
+    </script>
+
+</body>
+</html>

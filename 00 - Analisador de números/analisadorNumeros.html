@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisador de Números</title>
+    <link rel="stylesheet" href="style.css">
+  
+</head>
+
+<body>
+    <header>
+        <h1>Analisador de números</h1>
+    </header>
+    <section>
+        <div>
+            <p>Número (entre 1 e 100):
+                <input type="number" name="txtn" id="txtn">
+                <input type="button" value="Adicionar" onclick="adicionar()">
+            </p>
+            <select name="numeros" id="seltab" size="10">
+            </select>
+        </div>
+        <input type="button" value="Analisar" onclick="analisar()">
+        <div id="res">
+        </div>
+    </section>
+    <footer>
+        <p><a href="https://github.com/aecio-neto" rel="external" target="_blank">&copy; Aécio Neto</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
