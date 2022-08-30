@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>Brain Talk: Quiz de Curiosidades Gerais</title>
+
+  <style> 
+    label {
+      padding: 2px 5px;
+      width: 90%
+    }
+
+    .form-check:hover {
+      background-color: #b4b3b3;
+    }
+
+    .correct.answer {
+      background-color: green;
+    }
+
+    .wrong.answer {
+      background-color: rgb(213, 84, 84);
+    }
+
+
+  </style>
+
+</head>
+<body style="padding-bottom: 100px;">
+  
+  <header class="container">
+    
+    <div class="row pt-4">
+        <img class="col-2" src="img/logo 200 cropped.png" alt="">
+    </div>
+  </header>
+  
+  <main class="container">
+    
+    <div class="row mt-5">
+      <h1 class="col-12">Curiosidades Gerais</h1>
+      <p class="col-12">Responda estas perguntas de temas variados e mostre que você sabe tudo. </p>
+    </div>
+
+    <section class="row pt-4">
+
+      <div class="col-8"  >
+        <div class="alert alert-info d-none col-8" id="scoreMessage" role="alert">
+        </div>
+      </div>
+
+      <form class="col-md-8" >
+
+        <div class="d-flex justify-content-between text-center">
+          <div class="col-2 bg-light border"># 1</div>
+          <div class="col-2 bg-light border">1 Ponto</div>
+        </div>
+        
+          <article class="border">
+            <h2 class="h5 col border-bottom p-3">1 - Um ser humano tem, em média, quantos fios de cabelos?</h2>
+            <div class="alternativas">
+              <div class="form-check mb-3">
+                  <input type="radio" value="A" id="1-1" name="inputQuestion1">
+                  <label class="form-check-label" for="1-1">cerca de 1.000</label>
+                </div>
+                <div class="form-check mb-3">
+                  <input type="radio" value="B" id="1-2"  name="inputQuestion1">
+                  <label class="form-check-label" for="1-2">cerca de 10.000</label>
+                </div>
+                <div class="form-check mb-3">
+                  <input type="radio" value="C" id="1-3" name="inputQuestion1">
+                  <label class="form-check-label" for="1-3">cerca de 100.000</label>
+                </div>
+                <div class="form-check mb-3">
+                  <input type="radio" value="D" id="1-4" name="inputQuestion1">
+                  <label class="form-check-label" for="1-4">cerca de 1.000.000</label>
+                </div>
+                <div class="form-check mb-3">
+                  <input type="radio" value="E" id="1-5" name="inputQuestion1">
+                  <label class="form-check-label" for="1-5">cerca de 10.000.000</label>
+                </div>
+                <div class="moreInfo border-top d-none p-2" style="background-color: #fff20031;">
+                  <p>A média é 100.000 fios, porém cabelos loiros tem tendencia de ter até 140.000, enquanto os ruivos tem em média 80.000.</p>
+                </div>
+              </div>
+          </article>
+          <!-- //////////////////////////////////////// -->
+          <div class="d-flex justify-content-between text-center mt-5">
+            <div class="col-2 bg-light border"># 2</div>
+            <div class="col-2 bg-light border">1 Ponto</div>
+          </div>
+          
+            <article class="border">
+              <h2 class="h5 col border-bottom p-3">2 - Qual dos animais abaixo é mais rápido?</h2>
+              <div class="alternativas"> 
+                  <div class="form-check mb-3">
+                    <input type="radio" value="A" id="2-1"  name="inputQuestion2">
+                    <label class="form-check-label" for="2-1">O elefante</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="B" id="2-2"  name="inputQuestion2">
+                    <label class="form-check-label" for="2-2">O porco</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="C" id="2-3"  name="inputQuestion2">
+                    <label class="form-check-label" for="2-3">A girafa</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="D" id="2-4"  name="inputQuestion2">
+                    <label class="form-check-label" for="2-4">O gato</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="E" id="2-5"  name="inputQuestion2">
+                    <label class="form-check-label" for="2-5">A cobra</label>
+                  </div>
+                  <div class="moreInfo border-top d-none p-2" style="background-color: #fff20031;">
+                    <p>A girafa alcança 50 km/h enquanto o gato alcança 48 km/h, o porco 17 km/h, o elefante 40 km/h e a cobra 32 km/h.</p>
+                  </div>
+                </div>
+            </article>
+
+            <div class="d-flex justify-content-between text-center mt-5">
+              <div class="col-2 bg-light border"># 3</div>
+              <div class="col-2 bg-light border">1 Ponto</div>
+            </div>
+            <article class="border">
+              <h2 class="h5 col border-bottom p-3">3 - Somente em dois lugares do mundo, o homem vive mais que as mulheres. Que lugares são esses?</h2>
+              <div class="alternativas"> 
+                  <div class="form-check mb-3">
+                    <input type="radio" value="A" id="3-1" name="inputQuestion3">
+                    <label class="form-check-label hover" for="3-1">Na região central da África e no Chile</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="B" id="3-2"  name="inputQuestion3">
+                    <label class="form-check-label" for="3-2">No sul da Asia e no Irã</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="C" id="3-3"  name="inputQuestion3">
+                    <label class="form-check-label" for="3-3">Na India e no Paquistão</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="D" id="3-4"  name="inputQuestion3">
+                    <label class="form-check-label" for="3-4">No Irã e no Iraque</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="E" id="3-5"  name="inputQuestion3">
+                    <label class="form-check-label" for="3-5">No Egito e na Alemanha</label>
+                  </div>
+                </div>
+            </article>
+            <!-- ////////////////////////// -->
+            <div class="d-flex justify-content-between text-center mt-5">
+              <div class="col-2 bg-light border"># 4</div>
+              <div class="col-2 bg-light border">1 Ponto</div>
+            </div>
+            <article class="border">
+              <h2 class="h5 col border-bottom p-3">4 - Em que parte do corpo humano você encontra uma amostra completa do seu DNA?</h2>
+                
+                <div class="alternativas"> 
+                  <div class="form-check mb-3">
+                    <input type="radio" value="A" id="4-1" name="inputQuestion4">
+                    <label class="form-check-label hover" for="4-1">Nas unhas</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="B" id="4-2" name="inputQuestion4">
+                    <label class="form-check-label" for="4-2">Nos ossos</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="C" id="4-3" name="inputQuestion4">
+                    <label class="form-check-label" for="4-3">No tecido dos dedos</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="D" id="4-4" name="inputQuestion4">
+                    <label class="form-check-label" for="4-4">Nos cabelos</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="E" id="4-5" name="inputQuestion4">
+                    <label class="form-check-label" for="4-5">No coração</label>
+                  </div>
+                  <div class="moreInfo border-top d-none p-2" style="background-color: #fff20031;">
+                    <p>No cabelo. O bulbo capilar fornece uma verdadeira cópia heliográfica do DNA.</p>
+                  </div>
+                </div>
+            </article>
+            
+            <div class="d-flex justify-content-between text-center mt-5">
+              <div class="col-2 bg-light border"># 5</div>
+              <div class="col-2 bg-light border">1 Ponto</div>
+            </div>
+            <article class="border">
+              <h2 class="h5 col border-bottom p-3">5 - Quаl а tеmреrаturа nесеѕѕárіа раrа а gаѕоlіnа соngеlаr?</h2>
+                <div class="alternativas"> 
+                  <div class="form-check mb-3">
+                    <input type="radio" value="A" id="5-1" name="inputQuestion5">
+                    <label class="form-check-label hover" for="5-1">100 graus centígrados</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="B" id="5-2" name="inputQuestion5">
+                    <label class="form-check-label" for="5-2">-117,5 graus centígrados</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="C" id="5-3" name="inputQuestion5">
+                    <label class="form-check-label" for="5-3">-325 graus centígrados</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="D" id="5-4" name="inputQuestion5">
+                    <label class="form-check-label" for="5-4">-350,4 graus centígrados</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input type="radio" value="E" id="5-5" name="inputQuestion5">
+                    <label class="form-check-label" for="5-5">Nunca congela</label>
+                  </div>
+                  <div class="moreInfo border-top d-none p-2" style="background-color: #fff20031;">
+                    <p>Não importa o quão frio esteja, o combustível nunca congela. Abaixo de -117,5º C, a gasolina apenas se torna viscosa.</p>
+                  </div>
+                </div>
+            </article>
+            <input class="mt-3 mb-2 btn btn-primary" id="submitButton" type="submit" value="Conferir respostas">
+            <p class="userSubmitAlert d-none">Você deve responder todas as perguntas antes de conferir o resultado</p>
+            
+        </form>
+      </div>
+
+      <aside class="col-4-md col-sm position-sticky">
+        <div class="border bg-light p-3 rounded">
+          <h1 class="h5"> Notas sobre o projeto</h1>
+          <p>A ideia inicial era desenvolver um quiz que:</p>
+              <ul>
+                <li>Tivesse uma identidade visual diferente do exemplo da aula.</li>
+                <li>Mostrasse o resultado das respostas ao usuário.</li>
+                <li>Boilerplate inicial fornececido (Bootstrap))</li>
+              </ul>
+          <h2 class="h5">Considerações</h2>
+          <p>Inicialmente, ponderei se faria o projeto utilizando o Bootstrap ou Tailwind. Optei pelo Bootstrap, por ser uma ferramenta que ainda é muito utilizada. E, provavelmente, vou encontrá-la sendo utilizada em projetos de clientes.</p>
+          <h2 class="h5">Passo a passo</h2>
+          <p><strong>Pesquisa:</strong> Primeiro, fui buscar inspirações para o design. Vi alguns sites de Quiz e peguei algumas referências.</p>
+          <p><strong>Bootstrap:</strong> Comecei a ler a documentação do Boostrap e fiz o design do zero. Não utilizei o boilerplate inicial.</p>
+          <p><strong>Javascript:</strong> Depois, comecei a implementar o Javascript puro. (vanilla)</p>
+          <h2 class="h5">Funcionalidades adicionais</h2>
+          <ul>
+            <li>Efeito visual de sobreposição do mouse sobre as respostas. <strong>(ui/ux)</strong></li>
+            <li>Expansão da área de clique para selecionar resposta. <strong>(ui/ux)</strong></li>
+            <li>Validação do form. Necessário responder todas as perguntas antes de enviar o form. <strong>(array methods)</strong></li>
+            <li>Informações adicionais sobre o tema da pergunta são inseridas após a conferência das respostas.<strong>(manipulação do DOM)</strong></li>
+            <li>Rolagem da tela suave <strong>(ui/ux)</strong>.</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+
+
+  <script src="./app.js"></script>
+</body>
+</html>
