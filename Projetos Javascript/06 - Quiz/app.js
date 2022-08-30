@@ -50,8 +50,8 @@ form.addEventListener('submit', event => {
 
   // avisa o usuário que é preciso responder todas as perguntas
   // como seria a refatoração dessa parte? const validateForm()
-  const questionsNotAnswered = userAnswers.includes('')
-   if(questionsNotAnswered) {
+  const isQuestionsNotAnswered = userAnswers.includes('')
+   if(isQuestionsNotAnswered) {
     userSubmitAlert.classList.remove('d-none')
     return
   }
