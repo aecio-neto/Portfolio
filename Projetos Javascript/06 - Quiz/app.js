@@ -8,15 +8,8 @@ const correctAnswers = ['C', 'C','B', 'D','E']
 
 let score = 0
 
-const getUserAnswers = () => {
-  let userAnswers = []
-  correctAnswers.forEach((_, index) => {
-    const userAnswer = form[`inputQuestion${index + 1}`].value
-    userAnswers.push(userAnswer)
-  })
-  
-  return userAnswers
-}
+const getUserAnswers = () => userAnswers = correctAnswers.map((_, index) => 
+  form[`inputQuestion${index + 1}`].value)
 
 const calculateUserScore = userAnswers => {
   userAnswers.forEach((userAnswer, index) => {
@@ -37,6 +30,7 @@ const showFinalResult = () => {
   const message = `Você acertou ${score / 20}/5 pergunta(s) | ${score}% de aproveitamento.`
   scoreMessageContainer.textContent = message
   scoreMessageContainer.classList.remove('d-none')
+  score = 0;
 }
 
 const addExtraInfoElements = () => {
@@ -48,8 +42,6 @@ form.addEventListener('submit', event => {
 
   const userAnswers = getUserAnswers()
 
-  // avisa o usuário que é preciso responder todas as perguntas
-  // como seria a refatoração dessa parte? const validateForm()
   const isQuestionsNotAnswered = userAnswers.includes('')
    if(isQuestionsNotAnswered) {
     userSubmitAlert.classList.remove('d-none')
@@ -61,4 +53,5 @@ form.addEventListener('submit', event => {
   showFinalResult()
 
   addExtraInfoElements()
+
 })
