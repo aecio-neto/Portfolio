@@ -25,8 +25,8 @@ Users should be able to:
 
 ### Links
 
-- Solution url: [https://github.com/aecio-neto/portfolio/tree/main/1%20-%20Newbie/qr-code-component]()
-- Live Site url: [https://aecioneto.com.br/projetos/qr-code-component/]()
+- Solution URL: [Add solution URL here](https://github.com/aecio-neto/portfolio/tree/main/1%20-%20Newbie/qr-code-component).
+- Live Site URL: [Live site URL here](https://aecioneto.com.br/projetos/qr-code-component/).
 
 ### Built with
 
