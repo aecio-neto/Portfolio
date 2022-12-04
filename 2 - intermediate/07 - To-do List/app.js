@@ -6,11 +6,23 @@ const createTodoItem = (todoItemText) => {
   if (todoItemText.length != 0) {
     todosContainer.innerHTML += 
     `<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${todoItemText}">
-      <span>${todoItemText}</span>
-      <i class="far fa-trash-alt delete" data-trash="${todoItemText}"></i>
+    <span>${todoItemText}</span>
+    <i class="far fa-trash-alt delete" data-trash="${todoItemText}"></i>
     </li>`
   }
+  alert('opa')
 }
+
+/* 
+  if (todoItemText.length == 0)  return
+  
+  todosContainer.innerHTML += 
+    `<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${todoItemText}">
+    <span>${todoItemText}</span>
+    <i class="far fa-trash-alt delete" data-trash="${todoItemText}"></i>
+    </li>`
+}
+*/
 
 const removeTodo = (clickedElement) => {
   const trashDataValue = clickedElement.dataset.trash
