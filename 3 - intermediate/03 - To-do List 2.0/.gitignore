@@ -18,4 +18,5 @@
 # Avoid files
 README-template.md
 README.md
-./design
+style-guide-md
+design/
