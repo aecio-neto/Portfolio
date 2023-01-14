@@ -16,7 +16,9 @@
 .prettierignore
 
 # Avoid files
-README-template.md
-README.md
-style-guide.md
+
+arquivos/
 design/
+node_modules/
+package-lock.json
+package.json
