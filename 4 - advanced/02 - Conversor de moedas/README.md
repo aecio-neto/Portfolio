@@ -14,7 +14,6 @@ Conversor de moedas feito com html, css (bootstrap) e javascript (sem uso de fra
   - [O que vem pela frente](#o-que-vem-pela-frente)
 - [Autor](#autor)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Visão geral
 
@@ -36,8 +35,8 @@ Visitantes devem ser capazes de:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/aecio-neto/Portfolio/tree/main/4%20-%20advanced/02%20-%20Conversor%20de%20moedas)
-- Live Site URL: [Add live site URL here](https://aecioneto.com.br/projetos/conversor/)
+- [Solution URL: ](https://github.com/aecio-neto/Portfolio/tree/main/4%20-%20advanced/02%20-%20Conversor%20de%20moedas)
+- [Live Site URL: ](https://aecioneto.com.br/projetos/conversor/)
 
 ## Meu processo
 
@@ -74,5 +73,5 @@ Melhorar a parte visual dessa aplicação. E fazer novas aplicações para trein
 ## Autor
 
 - Website - [Aecio Neto](https://www.aecioneto.com.br)
-- Linkedin - [@yourusername](https://www.linkedin.com/in/aecio-neto)
+- Linkedin - [aecio-neto](https://www.linkedin.com/in/aecio-neto)
 
