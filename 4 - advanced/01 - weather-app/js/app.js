@@ -1,7 +1,3 @@
-// interessante a separação dos arquivos e suas funcionalidades
-// weather ficou com os requests e objetos obtidos 
-// app.js ficou com a manipulação do DOM
-
 const cityForm = document.querySelector('[data-js="change-location"]')
 const cityNameContainer = document.querySelector('[data-js="city-name"]')
 const cityWeather = document.querySelector('[data-js="city-weather"]')
