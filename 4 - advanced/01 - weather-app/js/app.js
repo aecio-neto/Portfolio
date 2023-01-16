@@ -1,3 +1,7 @@
+// interessante a separação dos arquivos e suas funcionalidades
+// weather ficou com os requests e objetos obtidos 
+// app.js ficou com a manipulação do DOM
+
 const cityForm = document.querySelector('[data-js="change-location"]')
 const cityNameContainer = document.querySelector('[data-js="city-name"]')
 const cityWeather = document.querySelector('[data-js="city-weather"]')
@@ -12,9 +16,18 @@ const insertCityCard = () => {
   }
 }
 
+const fetchCityWeatherInfo = async cityName => {
+  const [{ Key, LocalizedName }] = await getCityData(cityName)       // func declarada no weather.js
+  const [{WeatherText, Temperature, IsDayTime, WeatherIcon} ] = await getCityWeather(Key)
+  return { LocalizedName, WeatherText, Temperature, IsDayTime, WeatherIcon }
+}
+
 const diplayCityWeatherInfo = async cityName => {
-  const [{ Key, LocalizedName }] = await getCityData(cityName)
-  const [{ WeatherText, Temperature, IsDayTime, WeatherIcon }] = await getCityWeather(Key)
+  const { LocalizedName, WeatherText, Temperature, IsDayTime, WeatherIcon } =
+    await fetchCityWeatherInfo(cityName)
+  
+  console.log(Temperature)
+  
   const timeIcon = `<img src="./src/icons/${WeatherIcon}.svg" />`
   timeImg.src = IsDayTime ? './src/day.jpeg' : './src/noite.jpeg'
  
@@ -35,7 +48,7 @@ const loadLocalStorageCity = () => {
 
 cityForm.addEventListener('submit', event => {
   event.preventDefault()
-  const inputValue = event.target.city.value
+  const inputValue = event.target.city.value  // city vem do input/html
 
   diplayCityWeatherInfo(inputValue)
   localStorage.setItem('city', inputValue)
