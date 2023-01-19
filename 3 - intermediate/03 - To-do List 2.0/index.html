@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/main.css">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
@@ -11,24 +14,44 @@
 </head>
 <body>
 
-  <p class="font-serif text-2xl text-center m-4 p-4">Setup inicial do Tailwind feito. Agora é começar a desenvolver e customizar a aplicação.</p>
+  <header class="w-[1440px] mx-auto pb-5 mb-4" style="background-image: url(images/bg-desktop-light.jpg)">
+    
+     <div class="w-[480px] pt-24 mx-auto" id="todo-container">
+        
+        <div class="flex justify-between py-4 mb-6" id="todo-header">
+          <h1 class="uppercase text-white font-sans font-bold text-4xl tracking-[0.4em]">Todo</h1>
+          <a href="#"><img class="self-center" src="images/icon-moon.svg" alt="dark mode moon icon"></a>
+        </div>
+        
+        <div class="bg-white rounded h-16 py-3 pl-6 mb-6">
 
- <!--  Todo
+          <input class="rounded-full border-LightGrayishBlue p-3" type="checkbox" name="" id="">
+          <input class="border-none" type="text" name="" id="">
 
-  Add dynamic number items left
+        </div>
 
-  Todas
-  Ativas 
-  Finalizadas
+      </div>
 
-  Limpar Finalizadas
+      
+    </header>
 
-  Clique e arraeste para reordenar a lista -->
+<!--     <div class="w-[440px] mx-auto mb-6">
+      <h1>Cores que vou utilizar</h1>
+      <p class="bg-BrightBlue">Color: BrightBlue</p>
+      <p class="bg-CheckBackground">Color: CheckBackground</p>
+      <p class="bg-VeryLightGray">Color: VeryLightGray</p>
+      <p class="bg-VeryLightGrayishBlue">Color: VeryLightGrayishBlue</p>
+      <p class="bg-LightGrayishBlue">Color: LightGrayishBlue</p>
+      <p class="bg-DarkGrayishBlue">Color: DarkGrayishBlue</p>
+      <p class="bg-VeryDarkGrayishBlue">Color: VeryDarkGrayishBlue</p>
+    </div> -->
 
   <div class="attribution">
     Projetado por <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Desenvolvido por <a href="http://www.aecioneto.com.br">Aécio Neto</a>.
   </div>
+
   <script src="app.js"></script>
+
 </body>
 </html>
