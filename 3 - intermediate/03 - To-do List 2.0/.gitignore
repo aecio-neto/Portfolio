@@ -1,5 +1,3 @@
-<<<<<<< HEAD:3 - intermediate/03 - To-do List (Tailwind)/.gitignore
-=======
 # Avoid accidental upload of the Sketch and Figma design files
 #####################################################
 ## Please do not remove lines 5 and 6 - thanks! 🙂 ##
@@ -24,4 +22,4 @@ design/
 node_modules/
 package-lock.json
 package.json
->>>>>>> parent of 82fb69a (Rename 3 - intermediate/03 - To-do List 2.0/.gitignore to 3 - intermediate/03 - To-do List (Tailwind)/.gitignore):3 - intermediate/03 - To-do List 2.0/.gitignore
+exp.js
