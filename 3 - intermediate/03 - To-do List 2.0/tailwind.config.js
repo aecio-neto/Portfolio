@@ -1,12 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./*.html/', './*.js/'],
+  content: ['./*.{html,js}'],
   theme: {
     screens: {
       sm: '375px',
       md: '768px',
       lg: '976px',
       xl: '1440px',
+    },
+    fontFamily: {
+      sans: ['"Josefin-Sans"', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
     },
     extend: {
       colors: {
@@ -26,8 +30,8 @@ module.exports = {
         DarkGrayishBlue: 'hsl(234, 11%, 52%)',
         VeryDarkGrayishBlue: 'hsl(233, 14%, 35%)',
         VeryDarkGrayishBlue: 'hsl(237, 14%, 26%)',
-      }
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 }
