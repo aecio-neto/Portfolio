@@ -6,4 +6,6 @@ Essa é uma solução para o [Todo app challenge on Frontend Mentor](https://www
 
 ### Status atual
 
-![](images/print1.png)
+Desktop design em construção
+
+![](images/print2%20Desktop%20design%20in%20progress.png)
