@@ -9,7 +9,7 @@ module.exports = {
       xl: '1440px',
     },
     fontFamily: {
-      sans: ['"Josefin-Sans"', 'sans-serif'],
+      sans: ["'Josefin Sans'", 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
     extend: {
