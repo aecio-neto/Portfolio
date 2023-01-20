@@ -12,30 +12,83 @@
   
   <title>Lista de Tarefas | Tailwind | Frontend Mentor</title>
 </head>
-<body>
+<body class="font-sans bg-VeryLightGrayishBlue">
+  <!-- Header com background -->
+  <header class="max-w-[1440px] min-h-[300px] mx-auto pb-3" style="background-image: url(images/bg-desktop-light.jpg)">
 
-  <header class="w-[1440px] mx-auto pb-5 mb-4" style="background-image: url(images/bg-desktop-light.jpg)">
-    
-     <div class="w-[480px] pt-24 mx-auto" id="todo-container">
+    <!-- Header da Lista de Tarefas e o input de texto -->
+    <div class="w-[580px] pt-24 mx-auto" id="todo-container">
+      
+      <div class="flex justify-between mb-4">
+        <h1 class="uppercase text-white font-bold text-4xl tracking-[0.4em]">Todo</h1>
+        <a href="#"><img class="self-center" src="images/icon-moon.svg" alt="dark mode moon icon"></a>
+      </div>
+      
+      <!-- Inserção das tarefas -->
+      <div class="bg-white rounded-lg h-16 pl-6 flex items-center">
+       
+        <input class="rounded-full border-LightGrayishBlue p-3 mr-1" type="checkbox" name="" id="">
+       
+        <input class="pt-4 w-full border-none focus:ring-0 text-lg text-VeryDarkGrayishBlue" type="text" placeholder="Crie uma nova tarefa..." name="" id="">
+     
+      </div>
+    </div>
+
+  </header>
+
+  <main class="min-h-screen mb-4 pt-4">
+
+    <!-- Items wrapper -->
+    <div class="w-[580px] bg-white mx-auto -mt-16 rounded-lg divide-y-2 p-1 shadow text-lg text-VeryDarkGrayishBlue" id="">
+
+      <ul class="divide-y-2">
+        <!-- Itens -->
+        <li>
+          <div class="bg-white h-16 pl-6 flex items-center border-b-LightGrayisBlue">
+            <input class="rounded-full border-LightGrayishBlue p-3 mr-2" type="checkbox" name="" id="primeiro">
+            <label class="pt-2" for="primeiro">Primeiro item da lista</label>
+          </div>
+        </li>
+
+        <li>
+          <div class="bg-white rounded h-16 pl-6 flex items-center">
+            <input class="rounded-full border-LightGrayishBlue p-3 mr-2" type="checkbox" name="" id="segundo">
+            <label class="pt-2" class="pt-2" for="segundo">Segundo item da lista</label>
+          </div>
+        </li>
         
-        <div class="flex justify-between py-4 mb-6" id="todo-header">
-          <h1 class="uppercase text-white font-sans font-bold text-4xl tracking-[0.4em]">Todo</h1>
-          <a href="#"><img class="self-center" src="images/icon-moon.svg" alt="dark mode moon icon"></a>
-        </div>
+        <li>
+          <div class="bg-white rounded h-16 pl-6 flex items-center">
+            <input class="rounded-full border-LightGrayishBlue p-3 mr-2" type="checkbox" name="" id="terceiro">
+            <label class="pt-2" for="terceiro">Terceiro item da lista</label>
+          </div>
+        </li>
+
+      </ul>
+
+      <div class="p-2 pt-3 flex flex-row justify-between items-center text-base text-DarkGrayishBlue">
+        <span class="pl-2">Faltam 3 tarefas</span>
         
-        <div class="bg-white rounded h-16 py-3 pl-6 mb-6">
+        <ul class=" flex flex-row justify-between gap-4">
+          <li class="text-BrightBlue"><a href="#">Todas</a></li>
+          <li><a href="#">A fazer</a></li>
+          <li><a href="#">Feitas</a></li>
+        </ul>
 
-          <input class="rounded-full border-LightGrayishBlue p-3" type="checkbox" name="" id="">
-          <input class="border-none" type="text" name="" id="">
-
-        </div>
+        <button class="">Limpar completadas</button>
 
       </div>
 
-      
-    </header>
+    </div>
 
-<!--     <div class="w-[440px] mx-auto mb-6">
+    <div class="attribution mt-6">
+      Desenvolvido por <a href="http://www.aecioneto.com.br">Aécio Neto</a>.
+      Projetado por <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    </div>
+
+  </main>
+
+    <!-- <div class="w-[440px] mx-auto mb-6">
       <h1>Cores que vou utilizar</h1>
       <p class="bg-BrightBlue">Color: BrightBlue</p>
       <p class="bg-CheckBackground">Color: CheckBackground</p>
@@ -46,10 +99,7 @@
       <p class="bg-VeryDarkGrayishBlue">Color: VeryDarkGrayishBlue</p>
     </div> -->
 
-  <div class="attribution">
-    Projetado por <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Desenvolvido por <a href="http://www.aecioneto.com.br">Aécio Neto</a>.
-  </div>
+
 
   <script src="app.js"></script>
 
