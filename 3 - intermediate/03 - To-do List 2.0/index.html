@@ -45,24 +45,37 @@
         <!-- Itens -->
         <li>
           <div class="bg-white h-16 pl-6 flex items-center border-b-LightGrayisBlue">
-            <input class="rounded-full border-LightGrayishBlue p-3 mr-2" type="checkbox" name="" id="primeiro">
-            <label class="pt-2" for="primeiro">Primeiro item da lista</label>
+            <div class="p-[.04em] bg-gradient-to-r from-white to-white hover:from-[#8C9DFB] hover:to-[#BA63F1] rounded-full hover:cursor-pointer" id="checkbox-border-effect">
+              <input class="rounded-full border-LightGrayishBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="primeiro">
+            </div>
+            <label class="pt-2 ml-3 hover:cursor-pointer" for="primeiro">Fazer exercícios</label>
+            <img class="hover:cursor-pointer w-4 ml-64 " src="images/icon-cross.svg" alt="">
+          </div>
+        </li>
+        <!-- Item 2 -->
+        <li>
+          <div class="bg-white h-16 pl-6 flex items-center border-b-LightGrayisBlue">
+            <div class="p-[.04em] bg-gradient-to-r from-white to-white hover:from-[#8C9DFB] hover:to-[#BA63F1] rounded-full hover:cursor-pointer" id="checkbox-border-effect">
+              <input class="rounded-full border-LightGrayishBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="primeiro">
+            </div>
+            <label class="pt-2 ml-3 hover:cursor-pointer" for="primeiro">Marcar consulta no médico</label>
+            <img class="hover:cursor-pointer w-4 ml-64 " src="images/icon-cross.svg" alt="">
+          </div>
+        </li>
+        <!-- Item 3 -->
+        <li class="">
+
+            <div class="bg-white h-16 pl-6 flex items-center border-b-LightGrayisBlue">
+              <div class="p-[.04em] bg-gradient-to-r from-white to-white hover:from-[#8C9DFB] hover:to-[#BA63F1] rounded-full hover:cursor-pointer" id="checkbox-border-effect">
+                <input class="rounded-full border-LightGrayishBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="primeiro">
+              </div>
+              <label class="pt-2 ml-3 hover:cursor-pointer" for="primeiro">Instalar pixel de conversão</label>
+
+            <img class="hover:cursor-pointer w-4 ml-64" src="images/icon-cross.svg" alt="">
           </div>
         </li>
 
-        <li>
-          <div class="bg-white rounded h-16 pl-6 flex items-center">
-            <input class="rounded-full border-LightGrayishBlue p-3 mr-2" type="checkbox" name="" id="segundo">
-            <label class="pt-2" class="pt-2" for="segundo">Segundo item da lista</label>
-          </div>
-        </li>
         
-        <li>
-          <div class="bg-white rounded h-16 pl-6 flex items-center">
-            <input class="rounded-full border-LightGrayishBlue p-3 mr-2" type="checkbox" name="" id="terceiro">
-            <label class="pt-2" for="terceiro">Terceiro item da lista</label>
-          </div>
-        </li>
 
       </ul>
 
@@ -71,11 +84,11 @@
         
         <ul class=" flex flex-row justify-between gap-4">
           <li class="text-BrightBlue"><a href="#">Todas</a></li>
-          <li><a href="#">A fazer</a></li>
-          <li><a href="#">Feitas</a></li>
+          <li><a class="hover:text-black hover:cursor-pointer" href="#">A fazer</a></li>
+          <li><a class="hover:text-black hover:cursor-pointer" href="#">Feitas</a></li>
         </ul>
 
-        <button class="">Limpar completadas</button>
+        <button class="hover:text-black hover:cursor-pointer">Limpar completadas</button>
 
       </div>
 
@@ -83,10 +96,13 @@
 
     <div class="attribution mt-6">
       Desenvolvido por <a href="http://www.aecioneto.com.br">Aécio Neto</a>.
-      Projetado por <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     </div>
 
-  </main>
+    <!-- <div class="w-[580px] bg-LightGrayishBlue p-4 mx-auto ">
+      <p>teste de ícones</p>
+      <img src="images/icon-check.svg" alt="">
+      <img class="" src="images/icon-cross.svg" alt="">
+    </div> -->
 
     <!-- <div class="w-[440px] mx-auto mb-6">
       <h1>Cores que vou utilizar</h1>
@@ -98,6 +114,14 @@
       <p class="bg-DarkGrayishBlue">Color: DarkGrayishBlue</p>
       <p class="bg-VeryDarkGrayishBlue">Color: VeryDarkGrayishBlue</p>
     </div> -->
+
+  </main>
+
+ 
+
+    <!-- Notas
+    contain - é uma propriedade do background. Ela garante que toda a imagem
+    ficará visível. Como usá-la no tailwind? -->
 
 
 
