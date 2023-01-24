@@ -1,20 +1,48 @@
-/* 
-npm run build é o comando que gera o main.css
-o watch faz ele fazer isso automaticamente? 
-Vou testar.
-npm run watch - faz o carregamento automático. 
-o javascript está sendo inserido na página normalmente.
-*/
+const themeToggleBtn = document.querySelector('#theme-toggle-btn')
+const themeToggleDarkIcon = document.querySelector('#theme-toggle-dark-icon')
+const themeToggleLightIcon = document.querySelector('#theme-toggle-light-icon')
 
-/* const htmlParagraph = document.querySelector('p');
-const jsParagraph = document.createElement('p')
+// Checar configurações navegador/OS
 
-jsParagraph.classList.add('font-serif')
-jsParagraph.classList.add('text-2xl')
-jsParagraph.classList.add('text-center')
+const checkLocalStorageTheme = () => {
+  const isDarkModeOn = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
 
-jsParagraph.innerText = 'O JS também está funcionando?!'
-htmlParagraph.insertAdjacentElement('afterend', jsParagraph) */
+  if (isDarkModeOn) {
+    themeToggleLightIcon.classList.remove('hidden');
+  } else {
+    themeToggleDarkIcon.classList.remove('hidden');
+  }
+}
+
+themeToggleBtn.addEventListener('click', () => {
+  themeToggleDarkIcon.classList.toggle('hidden')
+  themeToggleLightIcon.classList.toggle('hidden')
+  
+  const darkModeOn = document.documentElement.classList.contains('dark')
+  const lightModeOn = localStorage.getItem('color-theme') === 'light'
+
+  if (localStorage.getItem('color-theme')) {
+      if (lightModeOn) {
+          document.documentElement.classList.add('dark')
+          localStorage.setItem('color-theme', 'dark')
+      } else {
+          document.documentElement.classList.remove('dark')
+          localStorage.setItem('color-theme', 'light')
+      }
+
+  } else {
+      if (darkModeOn) {
+          document.documentElement.classList.remove('dark')
+          localStorage.setItem('color-theme', 'light')
+      } else {
+          document.documentElement.classList.add('dark')
+          localStorage.setItem('color-theme', 'dark')
+      }
+  }
+    
+})
+
+checkLocalStorageTheme()
 
 
 
