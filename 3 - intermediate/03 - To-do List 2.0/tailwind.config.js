@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./*.{html,js}'],
+  darkMode: `class`,
   theme: {
     screens: {
       sm: '375px',
@@ -13,6 +14,12 @@ module.exports = {
       serif: ['Merriweather', 'serif'],
     },
     extend: {
+      backgroundImage: {
+        'dark': "url('/images/bg-desktop-dark.jpg')",
+        'light': "url('/images/bg-desktop-light.jpg')",
+        'mobile-dark': "url('/images/bg-mobile-dark.jpg')",
+        'mobile-light': "url('/images/bg-mobile-light.jpg')",
+      },
       colors: {
         // Light mode
         BrightBlue: 'hsl(220, 98%, 61%)',
