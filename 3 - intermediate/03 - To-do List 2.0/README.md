@@ -6,6 +6,7 @@ Essa é uma solução para o [Todo app challenge on Frontend Mentor](https://www
 
 ### Status atual
 
-Desktop design em construção
+Desktop design em construção | Light e Dark Mode
 
-![](images/print2%20Desktop%20design%20in%20progress.png)
+![](images/print3%20Destop%20%20Light%20Mode.png)
+![](images/print4%20Desktop%20Dark%20Mode.png)
