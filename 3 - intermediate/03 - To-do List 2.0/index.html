@@ -17,7 +17,7 @@
   <header class="max-w-[1440px] min-h-[300px] mx-auto pb-3 bg-light dark:bg-dark">
 
     <!-- Header da Lista de Tarefas e o input de texto -->
-    <div class="lg:w-[580px] sm:w-[360px] pt-24 mx-auto" id="todo-container">
+    <div class="md:w-[580px] sm:w-[360px] pt-24 mx-auto" id="todo-container">
       
       <div class="flex justify-between mb-4">
         <h1 class="uppercase text-white font-bold text-4xl tracking-[0.4em]">Todo</h1>
@@ -28,15 +28,14 @@
       </div>
       
       <!-- Inserção das tarefas -->
-      <div class="bg-white dark:bg-VeryDarkDesaturatedBlue rounded-lg py-2 pl-6 flex items-center">
        
-        <div class="p-[.04em] bg-gradient-to-r from-white to-white hover:from-[#8C9DFB] hover:to-[#BA63F1] rounded-full hover:cursor-pointer" id="checkbox-border-effect">
-          <input class="rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="nova tarefa">
-        </div>
-       
-        <input class="pt-4 ml-1 w-full border-none focus:ring-0 text-lg text-VeryDarkGrayishBlue dark:bg-VeryDarkDesaturatedBlue" for="nova tarefa" type="text" placeholder="Crie uma nova tarefa..." name="" id="">
+        <form class="bg-white dark:bg-VeryDarkDesaturatedBlue rounded-lg py-2 pl-6 flex items-center" action="" id="formInput">
+          <div class="p-[.04em] bg-gradient-to-r from-white to-white hover:from-[#8C9DFB] hover:to-[#BA63F1] rounded-full hover:cursor-pointer" id="checkbox-border-effect">
+            <input class="rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="">
+          </div>
+          <input class="pt-4 ml-1 w-full border-none focus:ring-0 text-lg text-VeryDarkGrayishBlue dark:bg-VeryDarkDesaturatedBlue todoInput" for="nova-tarefa" type="text" placeholder="Crie uma nova tarefa..." name="" id="todoInput">
+        </form>
      
-      </div>
     </div>
 
   </header>
@@ -44,9 +43,9 @@
   <main class="min-h-screen mb-4 pt-4">
 
     <!-- Items wrapper -->
-    <div class="lg:w-[580px] sm:w-[360px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto -mt-16 rounded-lg divide-y-2 p-1 shadow text-lg text-VeryDarkGrayishBlue" id="">
+    <div class="md:w-[580px] sm:w-[360px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto -mt-16 rounded-lg divide-y-2 p-1 shadow text-lg text-VeryDarkGrayishBlue" id="">
 
-      <ul class="divide-y-2">
+      <ul class="divide-y-2" id="todosContainer">
         <!-- Itens -->
         <li>
           <div class="bg-white dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue">
@@ -54,7 +53,7 @@
               <input class="rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="primeiro">
             </div>
             <label class="pt-2 ml-3 hover:cursor-pointer flex-grow dark:text-LightGrayishBlue" for="primeiro">Estudar data structures</label>
-            <img class="hover:cursor-pointer mx-2" src="images/icon-cross.svg" alt="">
+            <img class="hover:cursor-pointer mx-2 hidden" src="images/icon-cross.svg" alt="">
           </div>
         </li>
         <li class="py-4">
@@ -63,7 +62,7 @@
               <input class="rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="react">
             </div>
             <label class="pt-2 ml-3 hover:cursor-pointer flex-grow flex-wrap dark:text-LightGrayishBlue" for="react">Criar 5 projetos com ReactJS</label>
-            <img class="hover:cursor-pointer mx-2 " src="images/icon-cross.svg" alt="">
+            <img class="hover:cursor-pointer mx-2" src="images/icon-cross.svg" alt="">
           </div>
         </li>
         <li class="py-4">
@@ -72,7 +71,7 @@
               <input class="rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="svelte">
             </div>
             <label class="pt-2 ml-3 hover:cursor-pointer flex-grow flex-wrap dark:text-LightGrayishBlue" for="svelte">Criar 3 projetos com Svelte</label>
-            <img class="hover:cursor-pointer mx-2 " src="images/icon-cross.svg" alt="">
+            <img class="hover:cursor-pointer mx-2" src="images/icon-cross.svg" alt="">
           </div>
         </li>
       </ul>
