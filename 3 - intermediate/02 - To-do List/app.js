@@ -10,7 +10,7 @@ const createTodoItem = (todoItemText) => {
     <i class="far fa-trash-alt delete" data-trash="${todoItemText}"></i>
     </li>`
   }
-  alert('opa')
+  // alert('opa')
 }
 
 /* 

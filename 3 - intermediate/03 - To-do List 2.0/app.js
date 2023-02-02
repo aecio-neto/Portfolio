@@ -3,22 +3,18 @@ const themeToggleDarkIcon = document.querySelector('#theme-toggle-dark-icon')
 const themeToggleLightIcon = document.querySelector('#theme-toggle-light-icon')
 
 const todoInput = document.querySelector('#todoInput')
-const form = document.querySelector('form');
+const form = document.querySelector('form')
 const todosContainer = document.querySelector('#todosContainer')
 const listItem = document.querySelectorAll('.listItem')
-const trashIcons = document.querySelectorAll('.trashIcon')
-
-// console.log(todoInput, form, todosContainer, todoItems)
-
-let input = ''
+const todos = document.querySelectorAll("#todosContainer li")
 
 const checkLocalStorageTheme = () => {
   const isDarkModeOn = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
 
   if (isDarkModeOn) {
-    themeToggleLightIcon.classList.remove('hidden');
+    themeToggleLightIcon.classList.remove('hidden')
   } else {
-    themeToggleDarkIcon.classList.remove('hidden');
+    themeToggleDarkIcon.classList.remove('hidden')
   }
 }
 
@@ -29,26 +25,26 @@ themeToggleBtn.addEventListener('click', () => {
   const checkLocalTheme = localStorage.getItem('color-theme')
   const darkModeOn = document.documentElement.classList.contains('dark')
   const lightModeOn = localStorage.getItem('color-theme') === 'light'
-
+  
   if (checkLocalTheme) {
-      if (lightModeOn) {
-          document.documentElement.classList.add('dark')
-          localStorage.setItem('color-theme', 'dark')
-      } else {
-          document.documentElement.classList.remove('dark')
-          localStorage.setItem('color-theme', 'light')
-      }
-
-  } else {
-      if (darkModeOn) {
-          document.documentElement.classList.remove('dark')
-          localStorage.setItem('color-theme', 'light')
-      } else {
-          document.documentElement.classList.add('dark')
-          localStorage.setItem('color-theme', 'dark')
-      }
-  }
+    if (lightModeOn) {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('color-theme', 'dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('color-theme', 'light')
+    }
     
+  } else {
+    if (darkModeOn) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('color-theme', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('color-theme', 'dark')
+    }
+  }
+  
 })
 
 /* Passo a passo
@@ -58,15 +54,15 @@ b) Pegar o texto que o usuário irá digitar
 -- let input armazena o texto após o submit - ok
 
 c) Inserir no DOM o html com o texto/for/id - ok
-  pegar referência da lista de itens
-  modificar a estrutura do html +=
-  é possível fazer um appendChild também.
+pegar referência da lista de itens
+modificar a estrutura do html +=
+é possível fazer um appendChild também.
 
 d) mostrar o trash button X quando houver um hover na Li - OK
 
 e) deletar tarefas quando clicado no X - Ok
 
-f) fazer as lis/tarefas inseridas serem interativas - em andamento
+f) fazer as lis/tarefas inseridas serem interativas - ok
 
 g) riscar o texto quando o input é marcado com checked
 
@@ -77,75 +73,73 @@ z) refatorar código
 */
 
 const createTodoItem = () => {
-
+  
+  let input = ''
+  
   todoInput.addEventListener('input', event => {
-    input = event.target.value
-    
+    input = event.target.value    
   })
-
+  
   form.addEventListener('submit', event => {
     event.preventDefault()
-    console.log(input)
-
-    const newTodoItem = document.createElement('li')
     
-    const p = document.createElement('p')
-    p.innerText = 'Inserido Before oque?'
-    
-    newTodoItem.innerHTML = `
-      <div class="dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue">
-        <div class="p-[.04em] bg-gradient-to-r from-white to-white hover:from-[#8C9DFB] hover:to-[#BA63F1] rounded-full hover:cursor-pointer" id="checkbox-border-effect">
-          <input class="rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="${input}">
-        </div>
-        <label class="pt-2 ml-3 hover:cursor-pointer flex-grow dark:text-LightGrayishBlue" for="${input}">${input}</label>
-        <img class="hover:cursor-pointer mx-2 hidden" src="images/icon-cross.svg" alt="">
-      </div>`
-
-      todosContainer.appendChild(newTodoItem)
-
-    form.reset()
-
+  const newLi = document.createElement("li")
+  newLi.className = "dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue listItem";
+  
+  const newInput = document.createElement("input")
+  newInput.className = "rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]"
+  newInput.type = "checkbox"
+  newInput.name = input
+  
+  const newLabel = document.createElement("label")
+  newLabel.className = "pt-2 ml-3 hover:cursor-pointer flex-grow dark:text-LightGrayishBlue"
+  newLabel.textContent = input
+  
+  const newImg = document.createElement("img")
+  newImg.className = "hover:cursor-pointer mx-[15px] trashIcon hidden sm:visible"
+  newImg.src = "images/icon-cross.svg"
+  newImg.alt = ""
+  
+  newLi.appendChild(newInput)
+  newLi.appendChild(newLabel)
+  newLi.appendChild(newImg)
+  todosContainer.appendChild(newLi)
+  
+  newLi.addEventListener("mouseover", () => {
+    newImg.classList.remove("hidden")
   })
+  newLi.addEventListener("mouseout", () => {
+    newImg.classList.add("hidden")
+  })
+  
+  form.reset()
+})
 }
 
-const showTrashIcon = () =>{
-  listItem.forEach(listItem => {
-    const trashIcon = listItem.lastElementChild
-    
-    listItem.addEventListener('mouseover', event => {
-      if (trashIcon.classList.contains('hidden')) {
-        listItem.lastElementChild.classList.remove('hidden')
-      }
+const displayTrashIcon = () => {
+  todos.forEach(todo => {
+    todo.addEventListener("mouseover", function() {
+      todos.forEach(item => {
+        item.querySelector("img").classList.remove('hidden')
+      })
+      this.querySelector("img").classList.add('hidden')
     })
   })
 }
 
-const hideTrashIcon = () => {
-  listItem.forEach(listItem => {
-    const trashIcon = listItem.lastElementChild
-    listItem.addEventListener('mouseout', event => {
-      if (!trashIcon.classList.contains('hidden')) {
-        listItem.lastElementChild.classList.add('hidden')
-      }
-    })
-  })
-}
 
-const deleteTodoItem = () => {
-  trashIcons.forEach(item => {
-    item.addEventListener('click', event => {
-      item.parentElement.parentNode.remove()
-    })
+const removeTodoItem = () => {
+  todosContainer.addEventListener('click', event => {
+    const clickedElement = event.target
+    if (clickedElement.tagName === 'IMG') {
+      clickedElement.parentElement.remove()
+    }
   })
 }
 
 
 checkLocalStorageTheme()
 createTodoItem()
-showTrashIcon()
-hideTrashIcon()
-deleteTodoItem()
-
-
-
+displayTrashIcon()
+removeTodoItem()
 
