@@ -46,38 +46,26 @@
     <div class="md:w-[580px] sm:w-[340px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto -mt-16 rounded-lg divide-y-2  shadow text-lg text-VeryDarkGrayishBlue" id="">
 
       <ul class="divide-y-2" id="todosContainer">
-        <li class="dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue listItem">
-            <input class="peer rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1] line-through" type="checkbox" name="" id="Estudar data structures">
-            <label class="peer-checked:line-through pt-2 ml-3 hover:cursor-pointer flex-grow dark:text-LightGrayishBlue" for="Estudar data structures">Estudar data structures
-            </label>
-            <img class="hover:cursor-pointer mx-[15px] trashIcon hidden sm:visible" src="images/icon-cross.svg" alt="">
-        </li>
-        <li class="dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue listItem">
-            <input class="peer rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1] line-through" type="checkbox" name="" id="react">
-            <label class="peer-checked:line-through pt-2 ml-3 hover:cursor-pointer flex-grow dark:text-LightGrayishBlue" for="react">Fazer 5 projetos com reactJS
-            </label>
-            <img class="hover:cursor-pointer mx-[15px] trashIcon hidden sm:visible" src="images/icon-cross.svg" alt="">
-        </li>
       </ul>
 
       <div class="p-2 pt-3 flex justify-between items-center text-base text-DarkGrayishBlue">
         <span class="pl-2" id="counter"></span>
         
-        <ul class="flex sm:hidden lg:contents">
-          <li class="text-BrightBlue allTodosBtn"><a href="#">Todas</a></li>
-          <li><a class="hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer todoBtn" href="#">A fazer</a></li>
-          <li><a class="hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer doneBtn" href="#">Feitas</a></li>
+        <ul class="flex sm:hidden lg:contents filterNav">
+          <li class="allTodosBtn"><a class="active:text-BrightBlue text-BrightBlue" href="#">Todas</a></li>
+          <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer todoBtn" href="#">A fazer</a></li>
+          <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer doneBtn" href="#">Feitas</a></li>
         </ul>
-        <button class="hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer">Limpar completadas</button>
+        <button class="hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" id="clearBtn">Limpar completadas</button>
       </div>
 
     </div>
 
     <div class="md:w-[580px] sm:w-[340px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto mt-8 rounded-lg shadow text-lg text-VeryDarkGrayishBlue">
-      <ul class="flex flex-row justify-center p-4 gap-6 lg:hidden">
-        <li class="text-BrightBlue allTodosBtn"><a href="#">Todas</a></li>
-        <li><a class="hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer uncompletedBtn" href="#">A fazer</a></li>
-        <li><a class="hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer completedBtn" href="#">Feitas</a></li>
+      <ul class="flex flex-row justify-center p-4 gap-6 lg:hidden filterNav">
+        <li class="allTodosBtn"><a class="active:text-BrightBlue" href="#">Todas</a></li>
+        <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer uncompletedBtn" href="#">A fazer</a></li>
+        <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer completedBtn" href="#">Feitas</a></li>
       </ul>
     </div>
 

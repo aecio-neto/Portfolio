@@ -14,13 +14,16 @@ f) fazer as lis/tarefas inseridas serem interativas - ok
 g) riscar o texto quando o input é marcado com checked - ok
 h) escrever quantas tarefas existem - ok
 i) filtrar tarefas feitas - ok
-j) filtrar tarefas a fazer
-l) limpar tarefas completadas
-m) mostrar todas as tarefas
-
-y) Bugs encontrados: X na versão mobile
-
+j) filtrar tarefas a fazer - Ok
+l) filtrar todas as tarefas - 
+m) limpar tarefas completadas - Ok
+n) configurar link ativos nos filtros
+o) configurar :check personalizado. before/after? 
 z) refatorar código
+
+y) Bugs encontrados: 
+X na versão mobile
+borda inferior quando sem tarefas
 
 */
 
@@ -33,8 +36,7 @@ const todoInput = document.querySelector('#todoInput')
 const form = document.querySelector('form')
 const todosContainer = document.querySelector('#todosContainer')
 const counter = document.querySelector('#counter')
-const completedBtn = document.querySelectorAll('.completedBtn')
-const uncompletedBtn = document.querySelectorAll('.uncompletedBtn')
+const clearBtn = document.querySelector('#clearBtn')
 
 
 const checkLocalStorageTheme = () => {
@@ -82,9 +84,13 @@ const countTodos = () => {
   const checkedTodos = todosContainer.querySelectorAll('input[type="checkbox"]:checked').length
   const todosLeft = todosInList - checkedTodos
 
-  todosLeft === 0 
-    ? counter.textContent = `Tarefas concluídas` 
-    : counter.textContent = `Faltam ${todosLeft} tarefas`
+  if (todosLeft === 0) {
+    counter.textContent = `Tarefas Concluídas`
+  } else if ( todosLeft === 1) {
+    counter.textContent = `Falta 1 tarefa `
+  } else {
+    counter.textContent = `Faltam ${todosLeft} tarefas`
+  }
 }
 
 const createTodoItem = () => {
@@ -142,46 +148,51 @@ const removeTodoItem = () => {
   })
 }
 
-const filterCompletedTodos = () => {
-  completedBtn.forEach(link => {
-    link.addEventListener('click', () => {
+const completedBtn = document.querySelectorAll('.completedBtn')
+const uncompletedBtn = document.querySelectorAll('.uncompletedBtn')
+const allTodosBtn = document.querySelectorAll('.allTodosBtn')
+const filterNav = document.querySelectorAll('.filterNav');
+
+const filterTodos = () => {
+  filterNav.forEach(navbar => {
+    navbar.addEventListener('click', e => {
+      const clickedElement = e.target
+      const filterAll = clickedElement.textContent === 'Todas'
+      const filterDone = clickedElement.textContent === 'Feitas'
+      const filterUndone = clickedElement.textContent === 'A fazer'
       const allTodos = Array.from(todosContainer.getElementsByTagName('li'))
       const checkedTodos = Array.from(todosContainer.querySelectorAll('input[type="checkbox"]:checked'))
       
+      if (filterAll) {
         allTodos.forEach(todo => {
-          todo.classList.toggle('hidden')
+          todo.classList.remove('hidden')
         })
-
-      checkedTodos.forEach(checked => {
-        checked.parentElement.classList.toggle('hidden')
-      })
+        checkedTodos.forEach(checked => {
+          checked.parentElement.classList.remove('hidden')
+        })
+      } else if (filterDone) {
+        allTodos.forEach(todo => {
+          todo.classList.add('hidden')
+        })
+        checkedTodos.forEach(checked => {
+          checked.parentElement.classList.remove('hidden')
+        })
+      } else if (filterUndone) {
+        allTodos.forEach(todo => {
+          todo.classList.remove('hidden')
+        })
+        checkedTodos.forEach(checked => {
+          checked.parentElement.classList.add('hidden')
+        })
+      }
     })
   })
 }
 
-const filterUndoneTodos = () => {
-  uncompletedBtn.forEach(link => {
-    link.addEventListener('click', () => {
-      const checkedTodos = Array.from(todosContainer.querySelectorAll('input[type="checkbox"]:checked'))
-      
-      checkedTodos.forEach(checked => {
-        checked.parentElement.classList.toggle('hidden')
-      })
-    })
-  })
-}
-
-const allTodosBtn = document.querySelectorAll('.allTodosBtn');
-
-const displayAllTodos = () => {
-  allTodosBtn.forEach(link => {
-    link.addEventListener('click', () => {
-      const allTodos = Array.from(todosContainer.getElementsByTagName('li'))
-
-      allTodos.forEach(li => {
-        li.classList.toggle('hidden')
-      })
-    })
+const clearAllDone = () => {
+  clearBtn.addEventListener('click', () => {
+    const checkedTodos = Array.from(todosContainer.querySelectorAll('input[type="checkbox"]:checked'))
+    checkedTodos.forEach(todo => todo.parentElement.remove())
   })
 }
 
@@ -190,7 +201,7 @@ changeThemeColor()
 countTodos()
 createTodoItem()
 removeTodoItem()
-filterCompletedTodos()
-filterUndoneTodos()
+filterTodos()
+clearAllDone()
 
 

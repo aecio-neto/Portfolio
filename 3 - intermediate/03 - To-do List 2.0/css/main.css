@@ -1082,6 +1082,11 @@ select {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+.active\:text-BrightBlue:active {
+  --tw-text-opacity: 1;
+  color: hsl(220 98% 61% / var(--tw-text-opacity));
+}
+
 .peer:checked ~ .peer-checked\:line-through {
   text-decoration-line: line-through;
 }
