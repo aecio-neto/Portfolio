@@ -9,6 +9,18 @@
 
   <link rel="stylesheet" href="css/main.css">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <script>
+    if (
+      localStorage.getItem('color-theme') === 'dark' ||
+      (!('color-theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
   
   <title>Lista de Tarefas | Tailwind | Frontend Mentor</title>
 </head>
@@ -20,7 +32,7 @@
       
       <div class="flex justify-between mb-4">
         <h1 class="uppercase text-white font-bold text-4xl tracking-[0.4em]">Todo</h1>
-        <button href="#" id="theme-toggle-btn">
+        <button id="theme-toggle-btn">
           <img class="self-center hidden" src="images/icon-moon.svg" alt="moon icon" id="theme-toggle-dark-icon">
           <img class="self-center hidden" src="images/icon-sun.svg" alt="sun icon" id="theme-toggle-light-icon">
         </button>
@@ -28,9 +40,9 @@
       
       <!-- Inserção das tarefas -->
        
-        <form class="bg-white dark:bg-VeryDarkDesaturatedBlue rounded-lg py-2 pl-6 flex items-center" action="" id="formInput">
+        <form class="bg-white dark:bg-VeryDarkDesaturatedBlue rounded-lg py-2 pl-6 flex items-center" action="" method="post" id="formInput">
           <div class="p-[.04em] bg-gradient-to-r from-white to-white hover:from-[#8C9DFB] hover:to-[#BA63F1] rounded-full hover:cursor-pointer" id="checkbox-border-effect">
-            <input class="rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox" name="" id="">
+            <input class="rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox">
           </div>
           <input class="pt-4 ml-1 w-full border-none focus:ring-0 text-lg text-VeryDarkGrayishBlue dark:bg-VeryDarkDesaturatedBlue todoInput" for="nova-tarefa" type="text" placeholder="Crie uma nova tarefa..." name="" id="todoInput" required>
         </form>
@@ -40,7 +52,7 @@
   <main class="min-h-screen mb-4 pt-4">
 
     <!-- Items wrapper -->
-    <div class="md:w-[580px] sm:w-[340px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto -mt-16 rounded-lg divide-y-2  shadow text-lg text-VeryDarkGrayishBlue" id="">
+    <div class="md:w-[580px] sm:w-[340px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto -mt-16 rounded-lg divide-y-2  shadow text-lg text-VeryDarkGrayishBlue">
 
       <ul class="divide-y-2" id="todosContainer">
         <!-- <li class="dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue listItem">
@@ -55,9 +67,9 @@
         <span class="pl-2" id="counter"></span>
         
         <ul class="flex sm:hidden lg:contents filterNav">
-          <li class="allTodosBtn"><a class="active:text-BrightBlue text-BrightBlue" href="#">Todas</a></li>
-          <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer todoBtn" href="#">A fazer</a></li>
-          <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer doneBtn" href="#">Feitas</a></li>
+          <li><a class="active:text-BrightBlue text-BrightBlue" href="#">Todas</a></li>
+          <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" href="#">A fazer</a></li>
+          <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" href="#">Feitas</a></li>
         </ul>
         <button class="hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" id="clearBtn">Limpar completadas</button>
       </div>
@@ -66,9 +78,9 @@
 
     <div class="md:w-[580px] sm:w-[340px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto mt-8 rounded-lg shadow text-lg text-VeryDarkGrayishBlue">
       <ul class="flex flex-row justify-center p-4 gap-6 lg:hidden filterNav">
-        <li class="allTodosBtn"><a class="active:text-BrightBlue" href="#">Todas</a></li>
-        <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer uncompletedBtn" href="#">A fazer</a></li>
-        <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer completedBtn" href="#">Feitas</a></li>
+        <li><a class="active:text-BrightBlue" href="#">Todas</a></li>
+        <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" href="#">A fazer</a></li>
+        <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" href="#">Feitas</a></li>
       </ul>
     </div>
 

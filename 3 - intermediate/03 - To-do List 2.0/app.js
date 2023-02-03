@@ -21,12 +21,12 @@ n) configurar link ativos nos filtros
 o) configurar :check personalizado. before/after? 
 z) refatorar código
 
-y) Bugs encontrados: 
+// Bugs encontrados: 
 X na versão mobile
-borda inferior quando sem tarefas
+borda inferior quando está sem tarefas
+flicking no botão do tema
 
 */
-
 
 const themeToggleBtn = document.querySelector('#theme-toggle-btn')
 const themeToggleDarkIcon = document.querySelector('#theme-toggle-dark-icon')
@@ -36,6 +36,7 @@ const todoInput = document.querySelector('#todoInput')
 const form = document.querySelector('form')
 const todosContainer = document.querySelector('#todosContainer')
 const counter = document.querySelector('#counter')
+const filterNav = document.querySelectorAll('.filterNav');
 const clearBtn = document.querySelector('#clearBtn')
 
 
@@ -65,8 +66,7 @@ const changeThemeColor = () => {
       } else {
         document.documentElement.classList.remove('dark')
         localStorage.setItem('color-theme', 'light')
-      }
-      
+      }      
     } else {
       if (darkModeOn) {
         document.documentElement.classList.remove('dark')
@@ -94,7 +94,6 @@ const countTodos = () => {
 }
 
 const createTodoItem = () => {
-
   let input = ''
   
   todoInput.addEventListener('input', event => {
@@ -150,11 +149,6 @@ const removeTodoItem = () => {
   })
 }
 
-const completedBtn = document.querySelectorAll('.completedBtn')
-const uncompletedBtn = document.querySelectorAll('.uncompletedBtn')
-const allTodosBtn = document.querySelectorAll('.allTodosBtn')
-const filterNav = document.querySelectorAll('.filterNav');
-
 const filterTodos = () => {
   filterNav.forEach(navbar => {
     navbar.addEventListener('click', e => {
@@ -165,6 +159,7 @@ const filterTodos = () => {
       const allTodos = Array.from(todosContainer.getElementsByTagName('li'))
       const checkedTodos = Array.from(todosContainer.querySelectorAll('input[type="checkbox"]:checked'))
       
+      // refatorar
       if (filterAll) {
         allTodos.forEach(todo => {
           todo.classList.remove('hidden')
