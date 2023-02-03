@@ -13,7 +13,6 @@
   <title>Lista de Tarefas | Tailwind | Frontend Mentor</title>
 </head>
 <body class="font-sans bg-VeryLightGrayishBlue dark:bg-VeryDarkDesaturatedBlue dark:text-Light">
-  <!-- Header com background -->
   <header class="max-w-[1440px] min-h-[300px] mx-auto pb-3 bg-light dark:bg-dark">
 
     <!-- Header da Lista de Tarefas e o input de texto -->
@@ -35,9 +34,7 @@
           </div>
           <input class="pt-4 ml-1 w-full border-none focus:ring-0 text-lg text-VeryDarkGrayishBlue dark:bg-VeryDarkDesaturatedBlue todoInput" for="nova-tarefa" type="text" placeholder="Crie uma nova tarefa..." name="" id="todoInput" required>
         </form>
-     
     </div>
-
   </header>
 
   <main class="min-h-screen mb-4 pt-4">
@@ -46,6 +43,12 @@
     <div class="md:w-[580px] sm:w-[340px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto -mt-16 rounded-lg divide-y-2  shadow text-lg text-VeryDarkGrayishBlue" id="">
 
       <ul class="divide-y-2" id="todosContainer">
+        <!-- <li class="dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue listItem">
+          <input class="peer rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1] line-through" type="checkbox" id="teste">
+          <label class="peer-checked:line-through pt-2 ml-3 hover:cursor-pointer flex-grow dark:text-LightGrayishBlue" for="teste">Fazer 5 projetos com reactJS
+          </label>
+          <img class="hover:cursor-pointer mx-[15px] trashIcon hidden sm:visible" src="images/icon-cross.svg" alt="">
+        </li> -->
       </ul>
 
       <div class="p-2 pt-3 flex justify-between items-center text-base text-DarkGrayishBlue">

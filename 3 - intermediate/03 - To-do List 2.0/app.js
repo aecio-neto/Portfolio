@@ -103,7 +103,7 @@ const createTodoItem = () => {
   
   form.addEventListener('submit', event => {
     event.preventDefault()
-    
+
     const newLi = document.createElement("li")
     newLi.className = "dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue listItem";
     
@@ -111,10 +111,12 @@ const createTodoItem = () => {
     newInput.className = "peer rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]"
     newInput.type = "checkbox"
     newInput.name = input
+    newInput.setAttribute('id', `${input}`) 
     
     const newLabel = document.createElement("label")
     newLabel.className = "peer-checked:line-through pt-2 ml-3 hover:cursor-pointer flex-grow dark:text-LightGrayishBlue"
     newLabel.textContent = input
+    newLabel.setAttribute('for', `${input}`) 
     
     const newImg = document.createElement("img")
     newImg.className = "hover:cursor-pointer mx-[15px] trashIcon hidden sm:visible"
