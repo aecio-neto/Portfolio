@@ -717,11 +717,6 @@ select {
   margin-right: auto;
 }
 
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -790,10 +785,6 @@ select {
   flex-grow: 1;
 }
 
-.transform {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .flex-row {
   flex-direction: row;
 }
@@ -808,10 +799,6 @@ select {
 
 .justify-between {
   justify-content: space-between;
-}
-
-.justify-evenly {
-  justify-content: space-evenly;
 }
 
 .gap-6 {
@@ -894,17 +881,12 @@ select {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-pink-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(236 72 153 / var(--tw-bg-opacity));
+.bg-light {
+  background-image: url('/images/bg-desktop-light.jpg');
 }
 
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.bg-light {
-  background-image: url('/images/bg-desktop-light.jpg');
 }
 
 .from-\[\#8C9DFB\] {
@@ -1007,6 +989,11 @@ select {
   letter-spacing: 0.4em;
 }
 
+.text-BrightBlue {
+  --tw-text-opacity: 1;
+  color: hsl(220 98% 61% / var(--tw-text-opacity));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1022,31 +1009,8 @@ select {
   color: hsl(234 11% 52% / var(--tw-text-opacity));
 }
 
-.text-BrightBlue {
-  --tw-text-opacity: 1;
-  color: hsl(220 98% 61% / var(--tw-text-opacity));
-}
-
-.text-\[\#fff\] {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-LightGrayishBlue {
-  --tw-text-opacity: 1;
-  color: hsl(234 39% 85% / var(--tw-text-opacity));
-}
-
 .line-through {
   text-decoration-line: line-through;
-}
-
-.accent-pink-500 {
-  accent-color: #ec4899;
-}
-
-.accent-black {
-  accent-color: #000;
 }
 
 .shadow {
@@ -1055,32 +1019,9 @@ select {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.drop-shadow {
-  --tw-drop-shadow: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.drop-shadow-md {
-  --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.drop-shadow-lg {
-  --tw-drop-shadow: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
 .drop-shadow-xl {
   --tw-drop-shadow: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.\!filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
 }
 
 .attribution {
@@ -1092,46 +1033,8 @@ select {
   color: hsl(228, 45%, 44%);
 }
 
-.after\:bg-check::after {
-  content: var(--tw-content);
-  background-image: url('images/icon-check.svg');
-}
-
-.after\:bg-\[url\(\'images\/icon-check\.svg\'\)\]::after {
-  content: var(--tw-content);
-  background-image: url('images/icon-check.svg');
-}
-
 .checked\:bg-gradient-to-r:checked {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.checked\:bg-\[url\(\'images\/icon-check\.svg\'\)\]:checked {
-  background-image: url('images/icon-check.svg');
-}
-
-.checked\:accent-pink-500:checked {
-  accent-color: #ec4899;
-}
-
-.before\:checked\:bg-gradient-to-r:checked::before {
-  content: var(--tw-content);
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.after\:checked\:bg-\[url\(\'images\/icon-check\.svg\'\)\]:checked::after {
-  content: var(--tw-content);
-  background-image: url('images/icon-check.svg');
-}
-
-.checked\:after\:bg-\[url\(\'images\/icon-check\.svg\'\)\]:checked::after {
-  content: var(--tw-content);
-  background-image: url('images/icon-check.svg');
-}
-
-.after\:checked\:after\:bg-\[url\(\'images\/icon-check\.svg\'\)\]:checked::after,::after {
-  content: var(--tw-content);
-  background-image: url('images/icon-check.svg');
 }
 
 .hover\:cursor-pointer:hover {
@@ -1153,19 +1056,14 @@ select {
   --tw-gradient-to: #BA63F1;
 }
 
-.hover\:text-black:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.hover\:text-LightGrayishBlue:hover {
-  --tw-text-opacity: 1;
-  color: hsl(234 39% 85% / var(--tw-text-opacity));
-}
-
 .hover\:text-BrightBlue:hover {
   --tw-text-opacity: 1;
   color: hsl(220 98% 61% / var(--tw-text-opacity));
+}
+
+.hover\:text-black:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .focus\:ring-0:focus {
@@ -1202,24 +1100,14 @@ select {
   color: hsl(236 33% 92% / var(--tw-text-opacity));
 }
 
-.dark .dark\:text-VeryDarkGrayishBlue {
+.dark .dark\:hover\:text-LightGrayishBlue:hover {
   --tw-text-opacity: 1;
-  color: hsl(237 14% 26% / var(--tw-text-opacity));
-}
-
-.dark .dark\:text-VeryDarkDesaturatedBlue {
-  --tw-text-opacity: 1;
-  color: hsl(235 24% 19% / var(--tw-text-opacity));
+  color: hsl(234 39% 85% / var(--tw-text-opacity));
 }
 
 .dark .dark\:hover\:text-HoverLightGrayishBlue:hover {
   --tw-text-opacity: 1;
   color: hsl(236 33% 92% / var(--tw-text-opacity));
-}
-
-.dark .dark\:hover\:text-LightGrayishBlue:hover {
-  --tw-text-opacity: 1;
-  color: hsl(234 39% 85% / var(--tw-text-opacity));
 }
 
 .dark .dark\:hover\:text-BrightBlue:hover {
