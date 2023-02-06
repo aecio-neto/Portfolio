@@ -9,7 +9,9 @@ const filterNav = document.querySelectorAll('.filterNav');
 const clearBtn = document.querySelector('#clearBtn')
 
 const checkLocalStorageTheme = () => {
-  const isDarkModeOn = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  const isDarkModeOn = localStorage
+  .getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window
+  .matchMedia('(prefers-color-scheme: dark)').matches)
 
   if (isDarkModeOn) {
     themeToggleLightIcon.classList.remove('hidden')
@@ -188,11 +190,3 @@ const init = () => {
 }
 
 init()
-
-// extra features
-// construir uma função de drap and drop para os itens da lista
-// implmentar login, senha, cadastro e logout
-// implementar um sistema de notificações para whatsapp
-// fazer os dados serem salvos no local storage ou no banco de dados
-
-
