@@ -1,44 +1,12 @@
-/* Passo a passo
-
-a) Checar configurações navegador/OS e definir o tema - feito
-b) Pegar o texto que o usuário irá digitar
--- let input armazena o texto após o submit - ok
-
-c) Inserir no DOM o html com o texto/for/id - ok
-pegar referência da lista de itens
-modificar a estrutura do html +=
-é possível fazer um appendChild também.
-d) mostrar o trash button X quando houver um hover na Li - Ok
-e) deletar tarefas quando clicado no X - Ok
-f) fazer as lis/tarefas inseridas serem interativas - ok
-g) riscar o texto quando o input é marcado com checked - ok
-h) escrever quantas tarefas existem - ok
-i) filtrar tarefas feitas - ok
-j) filtrar tarefas a fazer - Ok
-l) filtrar todas as tarefas - 
-m) limpar tarefas completadas - Ok
-n) configurar link ativos nos filtros
-o) configurar :check personalizado. before/after? 
-z) refatorar código
-
-// Bugs encontrados: 
-X na versão mobile
-borda inferior quando está sem tarefas
-flicking no botão do tema
-
-*/
-
 const themeToggleBtn = document.querySelector('#theme-toggle-btn')
 const themeToggleDarkIcon = document.querySelector('#theme-toggle-dark-icon')
 const themeToggleLightIcon = document.querySelector('#theme-toggle-light-icon')
-
 const todoInput = document.querySelector('#todoInput')
 const form = document.querySelector('form')
 const todosContainer = document.querySelector('#todosContainer')
 const counter = document.querySelector('#counter')
 const filterNav = document.querySelectorAll('.filterNav');
 const clearBtn = document.querySelector('#clearBtn')
-
 
 const checkLocalStorageTheme = () => {
   const isDarkModeOn = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -107,7 +75,7 @@ const createTodoItem = () => {
     newLi.className = "dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue listItem";
     
     const newInput = document.createElement("input")
-    newInput.className = "peer rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]"
+    newInput.className = "peer rounded-full focus:ring-0 border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1] hover:border-[#8C9DFB]"
     newInput.type = "checkbox"
     newInput.name = input
     newInput.setAttribute('id', `${input}`) 
@@ -159,7 +127,6 @@ const filterTodos = () => {
       const allTodos = Array.from(todosContainer.getElementsByTagName('li'))
       const checkedTodos = Array.from(todosContainer.querySelectorAll('input[type="checkbox"]:checked'))
       
-      // refatorar
       if (filterAll) {
         allTodos.forEach(todo => {
           todo.classList.remove('hidden')
@@ -193,12 +160,39 @@ const clearAllDone = () => {
   })
 }
 
-checkLocalStorageTheme()
-changeThemeColor()
-countTodos()
-createTodoItem()
-removeTodoItem()
-filterTodos()
-clearAllDone()
+const changeActiveLink = () => {
+  filterNav.forEach(navbar => {
+    navbar.addEventListener('click', e => {
+      const clickedElement = e.target
+      const links = navbar.querySelectorAll('a')
+
+      links.forEach(link => {
+        link.classList.remove('text-BrightBlue')
+        link.classList.remove('dark:text-LightGrayishBlue')
+      })
+      clickedElement.classList.add('text-BrightBlue')
+      clickedElement.classList.add('dark:text-LightGrayishBlue')
+    })
+  })
+}
+
+const init = () => {
+  checkLocalStorageTheme()
+  changeThemeColor()
+  countTodos()
+  createTodoItem()
+  removeTodoItem()
+  filterTodos()
+  clearAllDone()
+  changeActiveLink()
+}
+
+init()
+
+// extra features
+// construir uma função de drap and drop para os itens da lista
+// implmentar login, senha, cadastro e logout
+// implementar um sistema de notificações para whatsapp
+// fazer os dados serem salvos no local storage ou no banco de dados
 
 

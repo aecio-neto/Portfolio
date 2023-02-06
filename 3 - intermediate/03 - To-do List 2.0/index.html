@@ -2,11 +2,10 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="css/main.css">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
 
@@ -22,16 +21,15 @@
     }
   </script>
   
-  <title>Lista de Tarefas | Tailwind | Frontend Mentor</title>
+  <title>Lista de Tarefas com Tailwind | Aécio Neto</title>
 </head>
 <body class="font-sans bg-VeryLightGrayishBlue dark:bg-VeryDarkDesaturatedBlue dark:text-Light">
   <header class="max-w-[1440px] min-h-[300px] mx-auto pb-3 bg-light dark:bg-dark">
 
     <!-- Header da Lista de Tarefas e o input de texto -->
     <div class="md:w-[580px] sm:w-[340px] pt-24 mx-auto" id="todo-container">
-      
       <div class="flex justify-between mb-4">
-        <h1 class="uppercase text-white font-bold text-4xl tracking-[0.4em]">Todo</h1>
+        <h1 class="uppercase text-white font-bold flex-grow text-4xl tracking-[0.4em]">Todo</h1>
         <button id="theme-toggle-btn">
           <img class="self-center hidden" src="images/icon-moon.svg" alt="moon icon" id="theme-toggle-dark-icon">
           <img class="self-center hidden" src="images/icon-sun.svg" alt="sun icon" id="theme-toggle-light-icon">
@@ -39,58 +37,46 @@
       </div>
       
       <!-- Inserção das tarefas -->
-       
         <form class="bg-white dark:bg-VeryDarkDesaturatedBlue rounded-lg py-2 pl-6 flex items-center" action="" method="post" id="formInput">
           <div class="p-[.04em] bg-gradient-to-r from-white to-white hover:from-[#8C9DFB] hover:to-[#BA63F1] rounded-full hover:cursor-pointer" id="checkbox-border-effect">
             <input class="rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1]" type="checkbox">
           </div>
-          <input class="pt-4 ml-1 w-full border-none focus:ring-0 text-lg text-VeryDarkGrayishBlue dark:bg-VeryDarkDesaturatedBlue todoInput" for="nova-tarefa" type="text" placeholder="Crie uma nova tarefa..." name="" id="todoInput" required>
+          <input class="pt-4 ml-1 w-full border-none focus:ring-0 text-lg text-VeryDarkGrayishBlue dark:text-LightGrayishBlue  dark:bg-VeryDarkDesaturatedBlue todoInput" for="nova-tarefa" type="text" placeholder="Crie uma nova tarefa..." name="" id="todoInput" required>
         </form>
     </div>
   </header>
 
   <main class="min-h-screen mb-4 pt-4">
-
     <!-- Items wrapper -->
-    <div class="md:w-[580px] sm:w-[340px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto -mt-16 rounded-lg divide-y-2  shadow text-lg text-VeryDarkGrayishBlue">
-
+    <div class="md:w-[580px] sm:w-[340px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto -mt-16 rounded-lg drop-shadow-xl text-lg divide-y-2 text-VeryDarkGrayishBlue">
       <ul class="divide-y-2" id="todosContainer">
-        <!-- <li class="dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue listItem">
-          <input class="peer rounded-full border-LightGrayishBlue dark:bg-VeryDarkDesaturatedBlue p-3 hover:cursor-pointer checked:bg-gradient-to-r from-[#8C9DFB] to-[#BA63F1] line-through" type="checkbox" id="teste">
-          <label class="peer-checked:line-through pt-2 ml-3 hover:cursor-pointer flex-grow dark:text-LightGrayishBlue" for="teste">Fazer 5 projetos com reactJS
-          </label>
-          <img class="hover:cursor-pointer mx-[15px] trashIcon hidden sm:visible" src="images/icon-cross.svg" alt="">
-        </li> -->
+        <!-- Inserir todos -->
       </ul>
 
       <div class="p-2 pt-3 flex justify-between items-center text-base text-DarkGrayishBlue">
         <span class="pl-2" id="counter"></span>
-        
         <ul class="flex sm:hidden lg:contents filterNav">
-          <li><a class="active:text-BrightBlue text-BrightBlue" href="#">Todas</a></li>
-          <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" href="#">A fazer</a></li>
-          <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" href="#">Feitas</a></li>
+          <li><a class="hover:text-BrightBlue text-BrightBlue dark:text-LightGrayishBlue dark:hover:text-LightGrayishBlue" href="#">Todas</a></li>
+        <li><a class="hover:text-BrightBlue dark:hover:text-LightGrayishBlue hover:cursor-pointer" href="#">A fazer</a></li>
+        <li><a class="hover:text-BrightBlue dark:hover:text-LightGrayishBlue hover:cursor-pointer" href="#">Feitas</a></li>
         </ul>
         <button class="hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" id="clearBtn">Limpar completadas</button>
       </div>
-
     </div>
 
     <div class="md:w-[580px] sm:w-[340px] bg-white dark:bg-VeryDarkDesaturatedBlue mx-auto mt-8 rounded-lg shadow text-lg text-VeryDarkGrayishBlue">
       <ul class="flex flex-row justify-center p-4 gap-6 lg:hidden filterNav">
-        <li><a class="active:text-BrightBlue" href="#">Todas</a></li>
-        <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" href="#">A fazer</a></li>
-        <li><a class="active:text-BrightBlue hover:text-black dark:hover:text-HoverLightGrayishBlue hover:cursor-pointer" href="#">Feitas</a></li>
+        <li><a class="hover:text-BrightBlue text-BrightBlue dark:text-LightGrayishBlue dark:hover:text-LightGrayishBlue" href="#">Todas</a></li>
+        <li><a class="hover:text-BrightBlue dark:hover:text-LightGrayishBlue hover:cursor-pointer" href="#">A fazer</a></li>
+        <li><a class="hover:text-BrightBlue dark:hover:text-LightGrayishBlue hover:cursor-pointer" href="#">Feitas</a></li>
       </ul>
     </div>
 
-    <div class="attribution mt-6 dark:text-HoverLightGrayishBlue ">
-      Desenvolvido por <a href="http://www.aecioneto.com.br">Aécio Neto</a>.
+    <div class="attribution mt-6 dark:text-DarkGrayishBlue ">
+      Desenvolvido por <a class="dark:text-HoverLightGrayishBlue dark:hover:text-BrightBlue hover:cursor-pointer" href="http://www.aecioneto.com.br">Aécio Neto</a>.
     </div>
-
   </main>
 
   <script src="app.js"></script>
-
 </body>
 </html>

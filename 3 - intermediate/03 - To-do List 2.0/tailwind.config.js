@@ -19,6 +19,8 @@ module.exports = {
         'light': "url('/images/bg-desktop-light.jpg')",
         'mobile-dark': "url('/images/bg-mobile-dark.jpg')",
         'mobile-light': "url('/images/bg-mobile-light.jpg')",
+        'check': "url('images/icon-check.svg')",
+
       },
       colors: {
         // Light mode
