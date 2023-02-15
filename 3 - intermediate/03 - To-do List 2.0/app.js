@@ -64,15 +64,11 @@ const countTodos = () => {
 }
 
 const createTodoItem = () => {
-  let input = ''
-  
-  todoInput.addEventListener('input', event => {
-    input = event.target.value    
-  })
-  
+
   form.addEventListener('submit', event => {
     event.preventDefault()
-
+    const input = todoInput.value
+   
     const newLi = document.createElement("li")
     newLi.className = "dark:bg-VeryDarkDesaturatedBlue h-16 pl-6 flex items-center border-b-LightGrayisBlue listItem";
     
