@@ -1,21 +1,33 @@
 # Introdução - Frontend Mentor - Todo app solution
 
-Essa é uma lista de tarefa construída a partir do template disponilizado na plataforma do [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). 
+Esse projeto não é sobre uma lista de tarefas, é sobre o que aprendi fazendo uma lista de tarefas. Então, vamos começar por aqui, e depois descreverei o restante. 
 
-Meu objetivo era explorar as possibilidades de customização do leiaute usando o Tailwind e treinar os fundamentos da linguagem javascript. 
+Ao invés de seguir um tutorial, busquei fazer uma lista por minha conta e aprender com a mão na massa. Comecei a partir de um template disponibilizado na plataforma do [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Minha ideia era compreender e ganhar familiariade com: 
+
+- Manipulação do DOM, como adicionar e remover elementos da página
+- Usar o Taiwind para personalizar a apaência da aplicação. 
+- Implementar lógica de programação para que o usuário interaja com a página
+- Desenvolver boas práticas de programação para que eu possa melhorar a aplicação ao longo do tempo. 
+- Entender como é o processo de construção de um software. 
+- Usar ferramentas modernas que me ajudem a ser mais produtimo (npm, cli, git/github)
+- Trabalhar com versões em desenvolvimento/produção de uma aplicação. 
+- Ganhar experiência para construir coisas quem vão muito além de uma simples lista de tarefas. 
+
+Foi um ótimo projeto para treinar os pontos acima. E ele não acaba por aqui. Pois há melhorias que podem ser feitas. #LFG 
+
+Abaixo está uma visão geral e mais técnica sobre o projeto.
 
 ## Índice
 
-- [Visão Geral](#overview)
-  - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
+- [Visão Geral](#visao-geral)
+  - [Screenshot](#screenshots)
   - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
+- [Meu processo](#meu-processo)
+  - [Tecnologias utilizadas](#tecnologias-utilizadas)
+  - [O que aprendi](#o-que-aprendi)
+  - [Indo além](#indo-além)
+  - [Links úteis](#links-úteis)
+- [Onde me encontrar](#onde-me-encontrar)
 - [Acknowledgments](#acknowledgments)
 
 ## Visão Geral
@@ -43,7 +55,6 @@ Os usuários devem ser capazes de:
 ![](images/print5%20Mobile%20Dark%20.png)
 ![](images/print6%20Mobile%20Light.png)
 
-
 ### Links
 
 - [Ver ao vivo](https://todolist-tailwindcss.vercel.app/)
@@ -54,7 +65,6 @@ Os usuários devem ser capazes de:
 Fiz uma lista de passo a passo e fui trabalhando em uma de cada vez. Primeiro fiz o html/css para ter uma visão geral de como seria visualmente o produto final. Depois fui construindo as funcionalidades usando javascript. 
 
 **Ponto interessante:** Foi a primeira vez que usei o chatGPT para me ajudar a resolver um problema. E após algumas interações com a IA, eu tinha um código funcional nas mãos. 
-
 
 ### Tecnologias utilizadas
 
@@ -75,14 +85,14 @@ Fiz uma lista de passo a passo e fui trabalhando em uma de cada vez. Primeiro fi
   -- Como lidar com HTMLcolection e fazer o que queremos a partir daí. 
 
 **Uso Tailwind CSS**
--- Deploy e uso do framework
+-- Setup do framework via npm/cli
 -- CSS Grind e Flexbox e como trabalhar pensando em diferentes tipos de tela. 
 
 **ChatGPT e Github Copilot**
 -- Como utilizar tais ferramentas a nosso favor
 
 **Vercel / Github pages**
--- Como fazer um deploy através do nosso repositório no github
+-- Deploy feito através do repositório no github
 
 **Git/Git hub**
 -- Micro commits
@@ -98,7 +108,7 @@ Quanto à lista de tarefas, é possível fazer alguns ajustes, melhorar o códig
 - Transformar o app em uma aplicação fullstack
   -- implmentar login, senha, cadastro e logout
   -- implementar um sistema de notificações para whatsapp
-  -- fazer os dados serem salvos no local storage ou no banco de dados
+  -- fazer os dados serem salvos no local storage e/ou no banco de dados
 
 ### Links úteis
 
