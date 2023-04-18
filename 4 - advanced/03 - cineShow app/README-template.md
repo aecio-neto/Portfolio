@@ -1,6 +1,6 @@
-# Frontend Mentor - Todo app solution
+# CineShow app
 
-This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+Este é um aplicativo de entretenimento com várias páginas que permite que os usuários naveguem por diferentes seções de filmes, séries  e programas de TV. Os usuários podem pesquisar programas relevantes e ver mais informações o que lhe interessa e visualizar o layout ideal com base no tamanho da tela do dispositivo. O aplicativo é construído usando HTML, CSS e JavaScript. 
 
 ## Table of contents
 
@@ -59,10 +59,6 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - CSS custom properties
 - Flexbox
 - CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
 
 **Note: These are just examples. Delete this note and replace the list above with your own choices**
 
