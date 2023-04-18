@@ -7,12 +7,12 @@
 }
 
 :root {
-  --color-primary: #020d18;
-  --color-secondary: #f1c40f;
+  --color-primary: #10141E;
+  --color-secondary: #F54748;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 16px;
   background: var(--color-primary);
   color: #fff;
