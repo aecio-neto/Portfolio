@@ -13,8 +13,8 @@ eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MTNkOTNlODk2NjA1YTJiY2JkNWIxYWI5YTYxOGFhYyIsInN
 
 /* Recursos 
 
-Slider na primeira página
-20 filmes ou séries na primeira página
+Slider na primeira página - ok
+20 filmes ou séries na primeira página - ok
 Paginação no resultado da pesquisa
 Alerta, caso a busca não tenha nada escrito
  */
@@ -26,33 +26,30 @@ Buscar dados dos filmes via fetch api e popular esse slider.
 Dúvidas
 Onde guardar as chaves das apis? 
 Como trabalhar com menos requests a cada inserção de dados/imagens?
+Como mudar o formato da data?
 
 */
 
 const apiKey = `813d93e896605a2bcbd5b1ab9a618aac`
 const apiUlr = `https://api.themoviedb.org/3/movie/76341?api_key=${apiKey}&language=pt-BR`
 const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR`
+const moviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&page=1`
 const slider = document.querySelector('.swiper-wrapper')
+const popularMovies = document.querySelector('#popular-movies')
 
 const swiper = new Swiper('.swiper', {
-  
-  // Optional parameters
   direction: 'horizontal',
   loop: true,
-  // Responsive breakpoints
-  breakpoints: {
-    // when window width is >= 320px
+  breakpoints: { 
     320: {
       slidesPerView: 1,
       spaceBetween: 20
     },
-    // when window width is >= 480px
     480: {
       slidesPerView: 2,
       spaceBetween: 30
     },
-    // when window width is >= 920px
-    920: {
+    960: { 
       slidesPerView: 4,
       spaceBetween: 40
     },
@@ -64,7 +61,6 @@ const fetchNowPlayingMovies = async () => {
   const movies = await response.json()
   const moviesArray = movies.results
 
-  console.log(moviesArray)
   displayNowPlayingIntoDOM(moviesArray)
 }
 
@@ -87,7 +83,50 @@ const displayNowPlayingIntoDOM = movie => {
   });
 }
 
-fetchNowPlayingMovies()
+const fetchPopularMovies = async () => {
+  const response = await fetch(moviesUrl)
+  const movies = await response.json()
+  const moviesArray = movies.results
+
+  console.log(moviesArray)
+  displayPopularMoviesIntoDOM(moviesArray)
+}
+
+const displayPopularMoviesIntoDOM = movies => {
+
+  movies.forEach(movie => {
+    const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+
+    popularMovies.innerHTML += 
+    `<div class="card">
+        <a href="movie-details.html?id=1">
+          <img
+            src="${imageUrl}"
+            class="card-img-top"
+            alt="${movie.title}"
+          />
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">${movie.title}</h5>
+          <p class="card-text">
+            <small class="text-muted">Lançamento: ${movie.release_date}</small>
+          </p>
+      </div>
+    </div>`
+  });
+}
+
+// display movies
+// preciso fazer o fetch
+// alterar o dom com os movies. 
+// quanto? 
+
+const init = () => {
+  fetchNowPlayingMovies()
+  fetchPopularMovies()
+}
+
+document.addEventListener('DOMContentLoaded', init)
 
 /* Propriedades do objeto movie / now playing
 
