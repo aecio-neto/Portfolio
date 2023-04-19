@@ -31,11 +31,6 @@ Como mudar o formato da data?
 */
 
 const apiKey = `813d93e896605a2bcbd5b1ab9a618aac`
-const apiUlr = `https://api.themoviedb.org/3/movie/76341?api_key=${apiKey}&language=pt-BR`
-const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR`
-const moviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&page=1`
-const slider = document.querySelector('.swiper-wrapper')
-const popularMovies = document.querySelector('#popular-movies')
 
 const swiper = new Swiper('.swiper', {
   direction: 'horizontal',
@@ -61,6 +56,8 @@ const swiper = new Swiper('.swiper', {
 });
 
 const fetchNowPlayingMovies = async () => {
+  const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR`
+
   const response = await fetch(nowPlayingURL)
   const movies = await response.json()
   const moviesArray = movies.results
@@ -69,6 +66,7 @@ const fetchNowPlayingMovies = async () => {
 }
 
 const displayNowPlayingIntoDOM = movie => {
+  const slider = document.querySelector('.swiper-wrapper')
   const top10Movies = movie.slice(0, 9)
   
   top10Movies.forEach(item => {
@@ -88,6 +86,8 @@ const displayNowPlayingIntoDOM = movie => {
 }
 
 const fetchPopularMovies = async () => {
+  const moviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&page=1`
+  
   const response = await fetch(moviesUrl)
   const movies = await response.json()
   const moviesArray = movies.results
@@ -97,6 +97,7 @@ const fetchPopularMovies = async () => {
 }
 
 const displayPopularMoviesIntoDOM = movies => {
+  const popularMovies = document.querySelector('#popular-movies')
 
   movies.forEach(movie => {
     const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
