@@ -32,60 +32,62 @@ Como trabalhar com menos requests a cada inserção de dados/imagens?
 const apiKey = `813d93e896605a2bcbd5b1ab9a618aac`
 const apiUlr = `https://api.themoviedb.org/3/movie/76341?api_key=${apiKey}&language=pt-BR`
 const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR`
-// há vários paths para fazer requests. TV, Movies, Now Playing.
+const slider = document.querySelector('.swiper-wrapper')
 
 const swiper = new Swiper('.swiper', {
+  
   // Optional parameters
   direction: 'horizontal',
   loop: true,
-  slidesPerView: 3,
-  spaceBetween: 30,
-  // Pagination buttons
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
+  // Responsive breakpoints
+  breakpoints: {
+    // when window width is >= 320px
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 20
+    },
+    // when window width is >= 480px
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 30
+    },
+    // when window width is >= 920px
+    920: {
+      slidesPerView: 4,
+      spaceBetween: 40
+    },
+  }
 });
 
-const slider = document.querySelector('.swiper-wrapper')
-
-const fetchData = async () => {
+const fetchNowPlayingMovies = async () => {
   const response = await fetch(nowPlayingURL)
   const movies = await response.json()
+  const moviesArray = movies.results
 
-  console.log(movies.results[1])
-  displayNowPlayingIntoDOM(movies.results[0])
+  console.log(moviesArray)
+  displayNowPlayingIntoDOM(moviesArray)
 }
 
 const displayNowPlayingIntoDOM = movie => {
-  // como gerar múltiplos slides? 7, por exemplo? 
-  const imageUrl = `https://image.tmdb.org/t/p/w400/${movie.poster_path}`
+  const top10Movies = movie.slice(0, 9)
+  
+  top10Movies.forEach(item => {
+    const imageUrl = `https://image.tmdb.org/t/p/w500/${item.poster_path}`
 
-  slider.innerHTML = `
-          <div class="swiper-slide">
-            <a href="movie-details.html?id=1">
-              <img src="./images/no-image.jpg" alt="Movie Title" />
-            </a>
-            <h4 class="swiper-rating">
-              <i class="fas fa-star text-secondary"></i> 8 / 10
-            </h4>
-          </div>
-            <div class="swiper-slide">
-              <a href="movie-details.html?id=1">
-                <img src="${imageUrl}" alt="${movie.title}" />
-              </a>
-              <h4 class="swiper-rating">
-                <i class="fas fa-star text-secondary"></i>${movie.vote_average} / 10
-              </h4>
-            </div>`
+    slider.innerHTML += 
+    `
+    <div class="swiper-slide">
+      <a href="movie-details.html?id=1">
+        <img src="${imageUrl}" alt="${item.title}" />
+      </a>
+      <h4 class="swiper-rating">
+        <i class="fas fa-star text-secondary"></i>${item.vote_average} / 10
+      </h4>
+    </div>`
+  });
 }
 
-fetchData()
+fetchNowPlayingMovies()
 
 /* Propriedades do objeto movie / now playing
 
