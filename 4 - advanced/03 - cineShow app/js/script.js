@@ -20,40 +20,48 @@ Alerta, caso a busca não tenha nada escrito
  */
 
 /* Passo a passo
-Inserir slider na página principal
-Buscar dados dos filmes via fetch api e popular esse slider. 
+Inserir slider na página principal ok 
+Buscar dados dos filmes via fetch api e popular esse slider. - ok
+Popular o feed de filmes populares - ok
+Usar a página de movie-detais. 
 
 Dúvidas
 Onde guardar as chaves das apis? 
 Como trabalhar com menos requests a cada inserção de dados/imagens?
 Como mudar o formato da data?
+Como ignorar o swiper nas outras páginas? Importar? js diferente?
 
 */
 
 const apiKey = `813d93e896605a2bcbd5b1ab9a618aac`
+const path = window.location.pathname
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id');
 
-const swiper = new Swiper('.swiper', {
-  direction: 'horizontal',
-  loop: true,
-  breakpoints: { 
-    320: {
-      slidesPerView: 1,
-      spaceBetween: 20
-    },
-    480: {
-      slidesPerView: 2,
-      spaceBetween: 30
-    },
-    960: { 
-      slidesPerView: 4,
-      spaceBetween: 40
-    },
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
+const createSlide = () => {
+    const swiper = new Swiper('.swiper', {
+      direction: 'horizontal',
+      loop: true,
+      breakpoints: { 
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+        480: {
+          slidesPerView: 2,
+          spaceBetween: 30
+        },
+        960: { 
+          slidesPerView: 4,
+          spaceBetween: 40
+        },
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+}
 
 const fetchNowPlayingMovies = async () => {
   const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR`
@@ -104,7 +112,7 @@ const displayPopularMoviesIntoDOM = movies => {
 
     popularMovies.innerHTML += 
     `<div class="card">
-        <a href="movie-details.html?id=1">
+        <a href="movie-details.html?id=${movie.id}">
           <img
             src="${imageUrl}"
             class="card-img-top"
@@ -121,9 +129,67 @@ const displayPopularMoviesIntoDOM = movies => {
   });
 }
 
+const fetchMovieDetails = async () => {
+  const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR`)
+  const movie = await response.json()
+  console.log(movie)
+
+  insertMoviesDetailsIntoDom(movie)
+}
+
+const insertMoviesDetailsIntoDom = movie => {
+  const movieDetails = document.querySelector('#movie-details')
+  const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+  movieDetails.innerHTML = `
+  <div class="details-top">
+          <div>
+            <img
+              src="${imageUrl}"
+              class="card-img-top"
+              alt="${movie.title}"
+            />
+          </div>
+          <div>
+            <h2>${movie.title}</h2>
+            <p>
+              <i class="fas fa-star text-primary"></i>
+              ${movie.vote_average} / 10
+            </p>
+            <p class="text-muted">Lançamento: ${movie.release_date}</p>
+            <p>
+            ${movie.overview}
+            </p>
+            <h5>Gêneros</h5>
+            <ul class="list-group">
+              <li>${movie.genres[0].name}</li>
+              <li>${movie.genres[1].name}</li>
+              <li>${movie.genres[2].name}</li>
+            </ul>
+            <a href="${movie.homepage}" target="_blank" class="btn">Visitar página do Filme</a>
+          </div>
+        </div>
+        <div class="details-bottom">
+          <h2>Detalhes</h2>
+          <ul>
+            <li><span class="text-secondary">Orçamento:</span> ${movie.budget}</li>
+            <li><span class="text-secondary">Bilheteria:</span> ${movie.revenue}</li>
+            <li><span class="text-secondary">Duração:</span> ${movie.runtime} minutos</li>
+            <li><span class="text-secondary">Status:</span> ${movie.release_date}</li>
+          </ul>
+          <h4>Produtoras</h4>
+          <div class="list-group">${movie.production_companies[0].name}, ${movie.production_companies[1].name}</div>
+        </div>
+  `
+}
+
+fetchMovieDetails()
+
 const init = () => {
-  fetchNowPlayingMovies()
-  fetchPopularMovies()
+  if (path === `/index.html`) {
+    createSlide()
+    fetchNowPlayingMovies()
+    fetchPopularMovies()
+  }
 }
 
 document.addEventListener('DOMContentLoaded', init)
