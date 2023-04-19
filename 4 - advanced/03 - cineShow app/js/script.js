@@ -53,7 +53,11 @@ const swiper = new Swiper('.swiper', {
       slidesPerView: 4,
       spaceBetween: 40
     },
-  }
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
 });
 
 const fetchNowPlayingMovies = async () => {
@@ -116,11 +120,6 @@ const displayPopularMoviesIntoDOM = movies => {
   });
 }
 
-// display movies
-// preciso fazer o fetch
-// alterar o dom com os movies. 
-// quanto? 
-
 const init = () => {
   fetchNowPlayingMovies()
   fetchPopularMovies()
@@ -142,5 +141,3 @@ release_date
 original_title
 vote_average
 */
-
-
