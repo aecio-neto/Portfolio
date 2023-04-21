@@ -25,11 +25,13 @@ Buscar dados dos filmes via fetch api e popular esse slider. - ok
 Popular o feed de filmes populares - ok
 Usar a página de movie-detais. 
 
-Dúvidas
+Dúvidas / Bugs
 Onde guardar as chaves das apis? 
 Como trabalhar com menos requests a cada inserção de dados/imagens?
 Como mudar o formato da data?
-Como ignorar o swiper nas outras páginas? Importar? js diferente?
+Inserir classes/ids no html e modificar o conteúdo a partir das consts? 
+Problema com carregamento do nome das produtoras, alguns filmes não são carregados.
+Slider não funciona ao inverso (primeiro item)
 
 */
 
@@ -63,6 +65,8 @@ const createSlide = () => {
     });
 }
 
+// Now Playing 
+
 const fetchNowPlayingMovies = async () => {
   const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR`
 
@@ -75,7 +79,7 @@ const fetchNowPlayingMovies = async () => {
 
 const displayNowPlayingIntoDOM = movie => {
   const slider = document.querySelector('.swiper-wrapper')
-  const top10Movies = movie.slice(0, 9)
+  const top10Movies = movie.slice(0, 10)
   
   top10Movies.forEach(item => {
     const imageUrl = `https://image.tmdb.org/t/p/w500/${item.poster_path}`
@@ -83,7 +87,7 @@ const displayNowPlayingIntoDOM = movie => {
     slider.innerHTML += 
     `
     <div class="swiper-slide">
-      <a href="movie-details.html?id=1">
+      <a href="movie-details.html?id=${item.id}">
         <img src="${imageUrl}" alt="${item.title}" />
       </a>
       <h4 class="swiper-rating">
@@ -93,6 +97,8 @@ const displayNowPlayingIntoDOM = movie => {
   });
 }
 
+// Popular Movies
+
 const fetchPopularMovies = async () => {
   const moviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&page=1`
   
@@ -100,7 +106,6 @@ const fetchPopularMovies = async () => {
   const movies = await response.json()
   const moviesArray = movies.results
 
-  console.log(moviesArray)
   displayPopularMoviesIntoDOM(moviesArray)
 }
 
@@ -129,17 +134,27 @@ const displayPopularMoviesIntoDOM = movies => {
   });
 }
 
-const fetchMovieDetails = async () => {
-  const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR`)
-  const movie = await response.json()
-  console.log(movie)
+// Movie Details
 
-  insertMoviesDetailsIntoDom(movie)
+const fetchMovieDetails = async () => {
+  try {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR`)
+    const movie = await response.json()
+
+    insertMoviesDetailsIntoDom(movie)
+  } catch (error) {
+    console.error('Erro na chamada da API', error)
+  }
 }
+
 
 const insertMoviesDetailsIntoDom = movie => {
   const movieDetails = document.querySelector('#movie-details')
   const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+
+  const genresList = movie.genres.map(genre => `<li>${genre.name}</li>`).join('')
+  const companiesList = movie.production_companies.map(company => company.name).join(', ')
+  
   movieDetails.innerHTML = `
   <div class="details-top">
           <div>
@@ -161,9 +176,7 @@ const insertMoviesDetailsIntoDom = movie => {
             </p>
             <h5>Gêneros</h5>
             <ul class="list-group">
-              <li>${movie.genres[0].name}</li>
-              <li>${movie.genres[1].name}</li>
-              <li>${movie.genres[2].name}</li>
+              ${genresList}
             </ul>
             <a href="${movie.homepage}" target="_blank" class="btn">Visitar página do Filme</a>
           </div>
@@ -177,34 +190,19 @@ const insertMoviesDetailsIntoDom = movie => {
             <li><span class="text-secondary">Status:</span> ${movie.release_date}</li>
           </ul>
           <h4>Produtoras</h4>
-          <div class="list-group">${movie.production_companies[0].name}, ${movie.production_companies[1].name}</div>
+          <div class="list-group">${companiesList}</div>
         </div>
   `
 }
-
-fetchMovieDetails()
 
 const init = () => {
   if (path === `/index.html`) {
     createSlide()
     fetchNowPlayingMovies()
     fetchPopularMovies()
+  } else if (path.includes`/movie-details.html`) {
+    fetchMovieDetails()
   }
 }
 
 document.addEventListener('DOMContentLoaded', init)
-
-/* Propriedades do objeto movie / now playing
-
-results[0-15]
-results
-propriedades do objeto
-
-backdrop_path:
-original_title
-overview
-poster_path
-release_date
-original_title
-vote_average
-*/
