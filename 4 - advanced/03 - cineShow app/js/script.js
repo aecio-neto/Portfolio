@@ -1,36 +1,15 @@
-/* Links úteis
-https://swiperjs.com/
-https://developers.themoviedb.org/3/getting-started/introduction
-api key  - 
-813d93e896605a2bcbd5b1ab9a618aac
-api ulr - 
-https://api.themoviedb.org/3/movie/76341?api_key=<<api_key>>
-exemplo requisição - 
-https://api.themoviedb.org/3/movie/550?api_key=813d93e896605a2bcbd5b1ab9a618aac
-token leitura api - 
-eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MTNkOTNlODk2NjA1YTJiY2JkNWIxYWI5YTYxOGFhYyIsInN1YiI6IjY0M2U5MmU4YzYwMDZkMDRmZjgwYjc5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.V5pOy6fbFIKdbta9zNUL2oQHCTJGs5xKHNqg-a2hyMY
-*/
-
-/* Recursos 
-
-Slider na primeira página - ok
-20 filmes ou séries na primeira página - ok
-Paginação no resultado da pesquisa
-Alerta, caso a busca não tenha nada escrito
- */
-
 /* Passo a passo
 Inserir slider na página principal ok 
 Buscar dados dos filmes via fetch api e popular esse slider. - ok
 Popular o feed de filmes populares - ok
-Usar a página de movie-detais. 
+Usar a página de movie-detais. - ok
 
 Dúvidas / Bugs
 Onde guardar as chaves das apis? 
 Como trabalhar com menos requests a cada inserção de dados/imagens?
 Como mudar o formato da data?
-Inserir classes/ids no html e modificar o conteúdo a partir das consts? 
-Problema com carregamento do nome das produtoras, alguns filmes não são carregados.
+Como reduzir o uso do innerHTML? 
+  -classes/ids no html e modificar o conteúdo a partir das consts? 
 Slider não funciona ao inverso (primeiro item)
 
 */
@@ -66,7 +45,6 @@ const createSlide = () => {
 }
 
 // Now Playing 
-
 const fetchNowPlayingMovies = async () => {
   const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR`
 
@@ -98,7 +76,6 @@ const displayNowPlayingIntoDOM = movie => {
 }
 
 // Popular Movies
-
 const fetchPopularMovies = async () => {
   const moviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&page=1`
   
@@ -135,7 +112,6 @@ const displayPopularMoviesIntoDOM = movies => {
 }
 
 // Movie Details
-
 const fetchMovieDetails = async () => {
   try {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR`)
@@ -147,14 +123,13 @@ const fetchMovieDetails = async () => {
   }
 }
 
-
 const insertMoviesDetailsIntoDom = movie => {
   const movieDetails = document.querySelector('#movie-details')
   const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
   const genresList = movie.genres.map(genre => `<li>${genre.name}</li>`).join('')
   const companiesList = movie.production_companies.map(company => company.name).join(', ')
-  
+
   movieDetails.innerHTML = `
   <div class="details-top">
           <div>
