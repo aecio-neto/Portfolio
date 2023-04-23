@@ -170,13 +170,116 @@ const insertMoviesDetailsIntoDom = movie => {
   `
 }
 
+// Popular Shows
+const fetchPopularTvShows = async () => {
+  const showsUrl = `https://api.themoviedb.org/3/tv/popular?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&page=1`
+  
+  const response = await fetch(showsUrl)
+  const shows = await response.json()
+  const showsArray = shows.results
+
+  console.log(showsArray)
+
+  displayPopularTvShowsIntoDOM(showsArray)
+}
+
+const displayPopularTvShowsIntoDOM = movies => {
+  const popularShows = document.querySelector('#popular-shows')
+
+  movies.forEach(show => {
+    const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+
+    popularShows.innerHTML += 
+    `<div class="card">
+      <a href="tv-details.html?id=${show.id}">
+        <img
+          src="${imageUrl}"
+          class="card-img-top"
+          alt="${show.name}"
+        />
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">${show.name}</h5>
+        <p class="card-text">
+          <small class="text-muted">Exibido: ${show.first_air_date}</small>
+        </p>
+      </div>
+    </div>`
+  });
+}
+
+const fetchShowDetails = async () => {
+  const showUrl = `https://api.themoviedb.org/3/tv/${id}?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR`
+  try {
+    const response = await fetch(showUrl)
+    const show = await response.json()
+    console.log(show, id)
+
+    insertShowDetailsIntoDom(show)
+  } catch (error) {
+    console.error('Erro na chamada da API', error)
+  }
+}
+
+const insertShowDetailsIntoDom = show => {
+  const showDetails = document.querySelector('#show-details')
+  
+  const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+  const genresList = show.genres.map(genre => `<li>${genre.name}</li>`).join('')
+  const companiesList = show.production_companies.map(company => company.name).join(', ')
+
+  showDetails.innerHTML = `
+    <div class="details-top">
+      <div>
+        <img
+          src="${imageUrl}"
+          class="card-img-top"
+          alt="${show.name}"
+        />
+      </div>
+      <div>
+        <h2>${show.name}</h2>
+        <p>
+          <i class="fas fa-star text-primary"></i>
+          ${show.vote_average} / 10
+        </p>
+        <p class="text-muted">Lançamento: ${show.first_air_date}</p>
+        <p>
+        ${show.overview}
+        </p>
+        <h5>Gêneros</h5>
+        <ul class="list-group">
+        ${genresList}
+        </ul>
+        <a href="#" target="_blank" class="btn">Site Oficial</a>
+      </div>
+    </div>
+    <div class="details-bottom">
+      <h2>Mais informações</h2>
+      <ul>
+        <li><span class="text-secondary">Número de Episódios:</span> ${show.number_of_episodes}</li>
+        <li>
+          <span class="text-secondary">Último episódio transmitido:</span> ${show.last_episode_to_air.air_date}
+        </li>
+        <li><span class="text-secondary">Status:</span> ${show.status}</li>
+      </ul>
+      <h4>Produtoras</h4>
+      <div class="list-group">${companiesList}</div>
+    </div>`
+}
+
+
 const init = () => {
   if (path === `/index.html`) {
     createSlide()
     fetchNowPlayingMovies()
     fetchPopularMovies()
-  } else if (path.includes`/movie-details.html`) {
+  } else if (path.includes(`/movie-details.html`)) {
     fetchMovieDetails()
+  } else if (path.includes(`/shows.html`)){
+    fetchPopularTvShows()
+  } else if (path.includes(`/tv-details.html`)) {
+    fetchShowDetails()
   }
 }
 
