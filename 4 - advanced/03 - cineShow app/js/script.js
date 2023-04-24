@@ -1,9 +1,4 @@
-/* Passo a passo
-Inserir slider na página principal ok 
-Buscar dados dos filmes via fetch api e popular esse slider. - ok
-Popular o feed de filmes populares - ok
-Usar a página de movie-detais. - ok
-
+/* 
 Dúvidas / Bugs
 Onde guardar as chaves das apis? 
 Como trabalhar com menos requests a cada inserção de dados/imagens?
@@ -11,6 +6,7 @@ Como mudar o formato da data?
 Como reduzir o uso do innerHTML? 
   -classes/ids no html e modificar o conteúdo a partir das consts? 
 Slider não funciona ao inverso (primeiro item)
+Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between; aplicada ao elemento pai. 
 
 */
 
@@ -18,6 +14,8 @@ const apiKey = `813d93e896605a2bcbd5b1ab9a618aac`
 const path = window.location.pathname
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
+const searchTerm = urlParams.get('search-term')
+const type = urlParams.get('type')
 
 const createSlide = () => {
     const swiper = new Swiper('.swiper', {
@@ -129,6 +127,8 @@ const insertMoviesDetailsIntoDom = movie => {
 
   const genresList = movie.genres.map(genre => `<li>${genre.name}</li>`).join('')
   const companiesList = movie.production_companies.map(company => company.name).join(', ')
+  const overviewText = movie.overview && movie.overview !== "" ? movie.overview : "Sinopse indisponível";
+
 
   movieDetails.innerHTML = `
   <div class="details-top">
@@ -147,7 +147,7 @@ const insertMoviesDetailsIntoDom = movie => {
             </p>
             <p class="text-muted">Lançamento: ${movie.release_date}</p>
             <p>
-            ${movie.overview}
+            ${overviewText}
             </p>
             <h5>Gêneros</h5>
             <ul class="list-group">
@@ -227,6 +227,8 @@ const insertShowDetailsIntoDom = show => {
   const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
   const genresList = show.genres.map(genre => `<li>${genre.name}</li>`).join('')
   const companiesList = show.production_companies.map(company => company.name).join(', ')
+  const overviewText = show.overview && show.overview !== "" ? show.overview : "A sinopse deste programa não está disponível. Para mais informações, acesse o site oficial.";
+  const siteBtnText = show.homepage === "" ? `Site indisponível` : `Site Oficial`
 
   showDetails.innerHTML = `
     <div class="details-top">
@@ -245,13 +247,13 @@ const insertShowDetailsIntoDom = show => {
         </p>
         <p class="text-muted">Lançamento: ${show.first_air_date}</p>
         <p>
-        ${show.overview}
+        ${overviewText}
         </p>
         <h5>Gêneros</h5>
         <ul class="list-group">
         ${genresList}
         </ul>
-        <a href="#" target="_blank" class="btn">Site Oficial</a>
+        <a href="${show.homepage}" target="_blank" class="btn">${siteBtnText}</a>
       </div>
     </div>
     <div class="details-bottom">
@@ -268,18 +270,72 @@ const insertShowDetailsIntoDom = show => {
     </div>`
 }
 
+// a fetch da busca precisa ser diferente entre filme e shows. 
+// o clique nos resultados levará a uma página diferente de detalhes. 
+// o código das fetchs é bem repetitivo. Como reutilizar isso? 
+  // fazer funcionar primeiro. Refatorar depois.
+
+
+const searchForm = document.querySelector('.search-form');
+
+const searchMoviesOrShows = (e) => {
+  e.preventDefault()
+
+  const selectedRadio = document.querySelector('.search-radio input[type="radio"]:checked').value;
+  const querie = document.querySelector('#search-term').value;
+  
+  searchForm.action = "/search.html?type=" + encodeURIComponent(selectedRadio) 
+  + "&search-term=" + encodeURIComponent(querie);
+  
+  window.location.href = searchForm.action
+  searchForm.reset()
+}
+
+const fetchSearchQuerie = async () => {
+  const searchUrl = `https://api.themoviedb.org/3/search/${type}?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&query=${searchTerm}&page=1&include_adult=false`
+
+  const response = await fetch(searchUrl)
+  const shows = await response.json()
+  console.log(type, searchTerm, shows)
+
+  insertSearchResultsIntoDom(shows.results)
+}
+
+const insertSearchResultsIntoDom = shows => {
+  const showDetails = document.querySelector('#search-results')
+  
+  shows.forEach(show => {
+    const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+
+    showDetails.innerHTML += 
+    `<div class="card">
+      <a href="#">
+        <img src="${imageUrl}" class="card-img-top" alt="${show.name}" />
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">${show.name}</h5>
+        <p class="card-text">
+          <small class="text-muted">Lançamento: ${show.first_air_date}</small>
+        </p>
+      </div>
+    </div>`
+  })
+}
 
 const init = () => {
   if (path === `/index.html`) {
     createSlide()
     fetchNowPlayingMovies()
     fetchPopularMovies()
+    searchForm.addEventListener('submit', searchMoviesOrShows)
   } else if (path.includes(`/movie-details.html`)) {
     fetchMovieDetails()
   } else if (path.includes(`/shows.html`)){
     fetchPopularTvShows()
   } else if (path.includes(`/tv-details.html`)) {
     fetchShowDetails()
+  } else if (path.includes(`/search.html`)) {
+    fetchSearchQuerie()
   }
 }
 
