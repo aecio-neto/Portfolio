@@ -1,12 +1,16 @@
 /* 
-Dúvidas / Bugs
-Onde guardar as chaves das apis? 
-Como trabalhar com menos requests a cada inserção de dados/imagens?
-Como mudar o formato da data?
-Como reduzir o uso do innerHTML? 
-  -classes/ids no html e modificar o conteúdo a partir das consts? 
-Slider não funciona ao inverso (primeiro item)
-Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between; aplicada ao elemento pai. 
+Dúvidas 
+  Onde guardar as chaves das apis? 
+  Como trabalhar com menos requests a cada inserção de dados/imagens?
+  Como reduzir o uso do innerHTML? 
+    -classes/ids no html e modificar o conteúdo a partir das consts? 
+  Como mudar o formato da data?
+
+Bugs
+  Slider não funciona ao inverso (primeiro item)
+  Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between; aplicada ao elemento pai. 
+  Detalhes Série/Filmes - como voltar para busca ou para a última página vista?
+    Isso funcionaria bem?
 
 */
 
@@ -270,8 +274,6 @@ const insertShowDetailsIntoDom = show => {
     </div>`
 }
 
-// a fetch da busca precisa ser diferente entre filme e shows. 
-// o clique nos resultados levará a uma página diferente de detalhes. 
 // o código das fetchs é bem repetitivo. Como reutilizar isso? 
   // fazer funcionar primeiro. Refatorar depois.
 
@@ -305,17 +307,32 @@ const insertSearchResultsIntoDom = shows => {
   const showDetails = document.querySelector('#search-results')
   
   shows.forEach(show => {
-    const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+    let imageUrl = ``
+    let detailsLink = ``
+    const title = show.name ? show.name : show.title
+    const releaseDate = show.release_date ? show.release_date : show.first_air_date
+    
+    if (show.poster_path === null) {
+      imageUrl = `images/no-image.jpg`
+    } else {
+      imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+    }
+
+    if (type === `tv`) {
+      detailsLink = `tv-details.html?id=${show.id}`
+    } else {
+      detailsLink = `movie-details.html?id=${show.id}`
+    }
 
     showDetails.innerHTML += 
     `<div class="card">
-      <a href="#">
-        <img src="${imageUrl}" class="card-img-top" alt="${show.name}" />
+      <a href="${detailsLink}">
+        <img src="${imageUrl}" class="card-img-top" alt="${title}" />
       </a>
       <div class="card-body">
-        <h5 class="card-title">${show.name}</h5>
+        <h5 class="card-title">${title}</h5>
         <p class="card-text">
-          <small class="text-muted">Lançamento: ${show.first_air_date}</small>
+          <small class="text-muted">Lançamento: ${releaseDate}</small>
         </p>
       </div>
     </div>`
