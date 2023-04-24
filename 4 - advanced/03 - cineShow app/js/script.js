@@ -11,10 +11,11 @@ Bugs
   Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between; aplicada ao elemento pai. 
   Detalhes Série/Filmes - como voltar para busca ou para a última página vista?
     Isso funcionaria bem?
+  Busca não indica nada quando não há resultados. 
 
 */
 
-const apiKey = `813d93e896605a2bcbd5b1ab9a618aac`
+const apiKey = `api_key=813d93e896605a2bcbd5b1ab9a618aac`
 const path = window.location.pathname
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
@@ -46,15 +47,23 @@ const createSlide = () => {
     });
 }
 
+const fetchData = async (url, callback) => {
+  try {
+    const response = await fetch(url)
+    const data = await response.json()
+
+    callback(data.results)
+  } catch (error) {
+    console.error('Erro na chamada da API', error)
+  }
+}
+
+
 // Now Playing 
 const fetchNowPlayingMovies = async () => {
-  const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR`
+  const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?${apiKey}&language=pt-BR`
 
-  const response = await fetch(nowPlayingURL)
-  const movies = await response.json()
-  const moviesArray = movies.results
-
-  displayNowPlayingIntoDOM(moviesArray)
+  fetchData(nowPlayingURL, displayNowPlayingIntoDOM)
 }
 
 const displayNowPlayingIntoDOM = movie => {
@@ -79,13 +88,8 @@ const displayNowPlayingIntoDOM = movie => {
 
 // Popular Movies
 const fetchPopularMovies = async () => {
-  const moviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&page=1`
-  
-  const response = await fetch(moviesUrl)
-  const movies = await response.json()
-  const moviesArray = movies.results
-
-  displayPopularMoviesIntoDOM(moviesArray)
+  const moviesUrl = `https://api.themoviedb.org/3/movie/popular?${apiKey}&language=pt-BR&page=1`
+  fetchData(moviesUrl, displayPopularMoviesIntoDOM)
 }
 
 const displayPopularMoviesIntoDOM = movies => {
@@ -116,7 +120,7 @@ const displayPopularMoviesIntoDOM = movies => {
 // Movie Details
 const fetchMovieDetails = async () => {
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR`)
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?${apiKey}&language=pt-BR`)
     const movie = await response.json()
 
     insertMoviesDetailsIntoDom(movie)
@@ -176,15 +180,8 @@ const insertMoviesDetailsIntoDom = movie => {
 
 // Popular Shows
 const fetchPopularTvShows = async () => {
-  const showsUrl = `https://api.themoviedb.org/3/tv/popular?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&page=1`
-  
-  const response = await fetch(showsUrl)
-  const shows = await response.json()
-  const showsArray = shows.results
-
-  console.log(showsArray)
-
-  displayPopularTvShowsIntoDOM(showsArray)
+  const showsUrl = `https://api.themoviedb.org/3/tv/popular?${apiKey}&language=pt-BR&page=1`
+  fetchData(showsUrl, displayPopularTvShowsIntoDOM) 
 }
 
 const displayPopularTvShowsIntoDOM = movies => {
@@ -213,7 +210,7 @@ const displayPopularTvShowsIntoDOM = movies => {
 }
 
 const fetchShowDetails = async () => {
-  const showUrl = `https://api.themoviedb.org/3/tv/${id}?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR`
+  const showUrl = `https://api.themoviedb.org/3/tv/${id}?${apiKey}&language=pt-BR`
   try {
     const response = await fetch(showUrl)
     const show = await response.json()
@@ -274,9 +271,6 @@ const insertShowDetailsIntoDom = show => {
     </div>`
 }
 
-// o código das fetchs é bem repetitivo. Como reutilizar isso? 
-  // fazer funcionar primeiro. Refatorar depois.
-
 
 const searchForm = document.querySelector('.search-form');
 
@@ -286,21 +280,17 @@ const searchMoviesOrShows = (e) => {
   const selectedRadio = document.querySelector('.search-radio input[type="radio"]:checked').value;
   const querie = document.querySelector('#search-term').value;
   
-  searchForm.action = "/search.html?type=" + encodeURIComponent(selectedRadio) 
-  + "&search-term=" + encodeURIComponent(querie);
+  searchForm.action = `
+  /search.html?type=${encodeURIComponent(selectedRadio)}&search-term=${encodeURIComponent(querie)}`;
   
   window.location.href = searchForm.action
   searchForm.reset()
 }
 
 const fetchSearchQuerie = async () => {
-  const searchUrl = `https://api.themoviedb.org/3/search/${type}?api_key=813d93e896605a2bcbd5b1ab9a618aac&language=pt-BR&query=${searchTerm}&page=1&include_adult=false`
-
-  const response = await fetch(searchUrl)
-  const shows = await response.json()
-  console.log(type, searchTerm, shows)
-
-  insertSearchResultsIntoDom(shows.results)
+  const searchUrl = `
+  https://api.themoviedb.org/3/search/${type}?${apiKey}&language=pt-BR&query=${searchTerm}&page=1&include_adult=false`
+  fetchData(searchUrl, insertSearchResultsIntoDom)
 }
 
 const insertSearchResultsIntoDom = shows => {
