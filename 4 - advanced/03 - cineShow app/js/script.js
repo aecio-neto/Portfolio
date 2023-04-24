@@ -8,7 +8,7 @@ Dúvidas
 
 Bugs
   Slider não funciona ao inverso (primeiro item)
-  Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between; aplicada ao elemento pai. 
+  Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between aplicada ao elemento pai. 
   Detalhes Série/Filmes - como voltar para busca ou para a última página vista?
     Isso funcionaria bem?
   Busca não indica nada quando não há resultados. 
@@ -16,11 +16,10 @@ Bugs
 */
 
 const apiKey = `api_key=813d93e896605a2bcbd5b1ab9a618aac`
+const searchForm = document.querySelector('.search-form')
 const path = window.location.pathname
-const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id');
-const searchTerm = urlParams.get('search-term')
-const type = urlParams.get('type')
+const urlParams = new URLSearchParams(window.location.search)
+const id = urlParams.get('id')
 
 const createSlide = () => {
     const swiper = new Swiper('.swiper', {
@@ -44,7 +43,7 @@ const createSlide = () => {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
-    });
+    })
 }
 
 const fetchData = async (url, callback) => {
@@ -58,11 +57,9 @@ const fetchData = async (url, callback) => {
   }
 }
 
-
 // Now Playing 
 const fetchNowPlayingMovies = async () => {
   const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?${apiKey}&language=pt-BR`
-
   fetchData(nowPlayingURL, displayNowPlayingIntoDOM)
 }
 
@@ -83,7 +80,7 @@ const displayNowPlayingIntoDOM = movie => {
         <i class="fas fa-star text-secondary"></i>${item.vote_average} / 10
       </h4>
     </div>`
-  });
+  })
 }
 
 // Popular Movies
@@ -114,7 +111,7 @@ const displayPopularMoviesIntoDOM = movies => {
           </p>
       </div>
     </div>`
-  });
+  })
 }
 
 // Movie Details
@@ -132,11 +129,9 @@ const fetchMovieDetails = async () => {
 const insertMoviesDetailsIntoDom = movie => {
   const movieDetails = document.querySelector('#movie-details')
   const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-
   const genresList = movie.genres.map(genre => `<li>${genre.name}</li>`).join('')
   const companiesList = movie.production_companies.map(company => company.name).join(', ')
-  const overviewText = movie.overview && movie.overview !== "" ? movie.overview : "Sinopse indisponível";
-
+  const overviewText = movie.overview && movie.overview !== "" ? movie.overview : "Sinopse indisponível"
 
   movieDetails.innerHTML = `
   <div class="details-top">
@@ -206,7 +201,7 @@ const displayPopularTvShowsIntoDOM = movies => {
         </p>
       </div>
     </div>`
-  });
+  })
 }
 
 const fetchShowDetails = async () => {
@@ -224,11 +219,13 @@ const fetchShowDetails = async () => {
 
 const insertShowDetailsIntoDom = show => {
   const showDetails = document.querySelector('#show-details')
-  
   const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
   const genresList = show.genres.map(genre => `<li>${genre.name}</li>`).join('')
   const companiesList = show.production_companies.map(company => company.name).join(', ')
-  const overviewText = show.overview && show.overview !== "" ? show.overview : "A sinopse deste programa não está disponível. Para mais informações, acesse o site oficial.";
+  const overviewText = show.overview && show.overview !== "" 
+  ? show.overview 
+  : `A sinopse deste programa não está disponível. Para mais informações, acesse o site oficial.`
+  
   const siteBtnText = show.homepage === "" ? `Site indisponível` : `Site Oficial`
 
   showDetails.innerHTML = `
@@ -271,30 +268,30 @@ const insertShowDetailsIntoDom = show => {
     </div>`
 }
 
-
-const searchForm = document.querySelector('.search-form');
-
 const searchMoviesOrShows = (e) => {
   e.preventDefault()
 
-  const selectedRadio = document.querySelector('.search-radio input[type="radio"]:checked').value;
-  const querie = document.querySelector('#search-term').value;
+  const selectedRadio = document.querySelector('.search-radio input[type="radio"]:checked').value
+  const querie = document.querySelector('#search-term').value
   
   searchForm.action = `
-  /search.html?type=${encodeURIComponent(selectedRadio)}&search-term=${encodeURIComponent(querie)}`;
-  
+  /search.html?type=${encodeURIComponent(selectedRadio)}&search-term=${encodeURIComponent(querie)}`
   window.location.href = searchForm.action
   searchForm.reset()
 }
 
 const fetchSearchQuerie = async () => {
+  const searchTerm = urlParams.get('search-term')
+  const type = urlParams.get('type')
   const searchUrl = `
   https://api.themoviedb.org/3/search/${type}?${apiKey}&language=pt-BR&query=${searchTerm}&page=1&include_adult=false`
+  
   fetchData(searchUrl, insertSearchResultsIntoDom)
 }
 
 const insertSearchResultsIntoDom = shows => {
   const showDetails = document.querySelector('#search-results')
+  const type = urlParams.get('type')
   
   shows.forEach(show => {
     let imageUrl = ``
