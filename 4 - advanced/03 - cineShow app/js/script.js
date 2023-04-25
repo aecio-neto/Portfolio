@@ -57,7 +57,7 @@ const fetchData = async (url, callback) => {
   }
 }
 
-// Now Playing 
+// No Cinema
 const fetchNowPlayingMovies = async () => {
   const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?${apiKey}&language=pt-BR`
   fetchData(nowPlayingURL, displayNowPlayingIntoDOM)
@@ -119,6 +119,7 @@ const fetchMovieDetails = async () => {
   try {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?${apiKey}&language=pt-BR`)
     const movie = await response.json()
+    console.log(movie)
 
     insertMoviesDetailsIntoDom(movie)
   } catch (error) {
@@ -127,12 +128,17 @@ const fetchMovieDetails = async () => {
 }
 
 const insertMoviesDetailsIntoDom = movie => {
-  const movieDetails = document.querySelector('#movie-details')
+  const containerBg = document.querySelector('#container-bg')
+  const movieDetails = document.querySelector('#movie-details');
   const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+  const backdropImg = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
   const genresList = movie.genres.map(genre => `<li>${genre.name}</li>`).join('')
   const companiesList = movie.production_companies.map(company => company.name).join(', ')
   const overviewText = movie.overview && movie.overview !== "" ? movie.overview : "Sinopse indisponível"
-
+  
+  containerBg.style.background = `url(${backdropImg}) no-repeat center center/cover`;
+  movieDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
+  
   movieDetails.innerHTML = `
   <div class="details-top">
           <div>
@@ -174,7 +180,7 @@ const insertMoviesDetailsIntoDom = movie => {
 }
 
 // Popular Shows
-const fetchPopularTvShows = async () => {
+const loadPopularMovies = async () => {
   const showsUrl = `https://api.themoviedb.org/3/tv/popular?${apiKey}&language=pt-BR&page=1`
   fetchData(showsUrl, displayPopularTvShowsIntoDOM) 
 }
@@ -204,22 +210,24 @@ const displayPopularTvShowsIntoDOM = movies => {
   })
 }
 
-const fetchShowDetails = async () => {
+const loadShowDetails = async () => {
   const showUrl = `https://api.themoviedb.org/3/tv/${id}?${apiKey}&language=pt-BR`
+  
   try {
     const response = await fetch(showUrl)
     const show = await response.json()
-    console.log(show, id)
-
     insertShowDetailsIntoDom(show)
+
   } catch (error) {
     console.error('Erro na chamada da API', error)
   }
 }
 
 const insertShowDetailsIntoDom = show => {
+  const showBackground = document.querySelector('#show-background');
   const showDetails = document.querySelector('#show-details')
   const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+  const backdropImg = `https://image.tmdb.org/t/p/original/${show.backdrop_path}`
   const genresList = show.genres.map(genre => `<li>${genre.name}</li>`).join('')
   const companiesList = show.production_companies.map(company => company.name).join(', ')
   const overviewText = show.overview && show.overview !== "" 
@@ -227,6 +235,9 @@ const insertShowDetailsIntoDom = show => {
   : `A sinopse deste programa não está disponível. Para mais informações, acesse o site oficial.`
   
   const siteBtnText = show.homepage === "" ? `Site indisponível` : `Site Oficial`
+
+  showBackground.style.background = `url(${backdropImg}) no-repeat center center/cover`;
+  showDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
 
   showDetails.innerHTML = `
     <div class="details-top">
@@ -335,9 +346,9 @@ const init = () => {
   } else if (path.includes(`/movie-details.html`)) {
     fetchMovieDetails()
   } else if (path.includes(`/shows.html`)){
-    fetchPopularTvShows()
+    loadPopularMovies()
   } else if (path.includes(`/tv-details.html`)) {
-    fetchShowDetails()
+    loadShowDetails()
   } else if (path.includes(`/search.html`)) {
     fetchSearchQuerie()
   }
