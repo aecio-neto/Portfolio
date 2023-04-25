@@ -8,6 +8,9 @@ Dúvidas
 Bugs
   Slider não funciona ao inverso (primeiro item)
   Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between aplicada ao elemento pai. 
+
+Próximos passos:
+  formatar a nota do filme
 */
 
 const apiKey = `api_key=813d93e896605a2bcbd5b1ab9a618aac`
@@ -86,7 +89,6 @@ const fetchPopularMovies = async () => {
 
 const displayPopularMoviesIntoDOM = movies => {
   const popularMovies = document.querySelector('#popular-movies')
-  console.log(movies)
 
   movies.forEach(movie => {
     let date = `${movie.release_date}`
@@ -117,7 +119,6 @@ const fetchMovieDetails = async () => {
   try {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?${apiKey}&language=pt-BR`)
     const movie = await response.json()
-    console.log(movie)
 
     insertMoviesDetailsIntoDom(movie)
   } catch (error) {
@@ -328,7 +329,9 @@ const insertSearchResultsIntoDom = shows => {
     let imageUrl = ``
     let detailsLink = ``
     const title = show.name ? show.name : show.title
-    const releaseDate = show.release_date ? show.release_date : show.first_air_date
+    let releaseDate = show.release_date ? show.release_date : show.first_air_date
+
+    releaseDate = releaseDate.split("-").reverse().join("-")    
     
     if (show.poster_path === null) {
       imageUrl = `images/no-image.jpg`
