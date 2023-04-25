@@ -9,8 +9,7 @@ Dúvidas
 Bugs
   Slider não funciona ao inverso (primeiro item)
   Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between aplicada ao elemento pai. 
-  Busca não indica nada quando não há resultados. 
-
+  Data invertida. 
 */
 
 const apiKey = `api_key=813d93e896605a2bcbd5b1ab9a618aac`
@@ -89,8 +88,11 @@ const fetchPopularMovies = async () => {
 
 const displayPopularMoviesIntoDOM = movies => {
   const popularMovies = document.querySelector('#popular-movies')
+  console.log(movies)
 
   movies.forEach(movie => {
+    let date = `${movie.release_date}`;
+    date = date.split("-").reverse().join("-");
     const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
     popularMovies.innerHTML += 
@@ -99,13 +101,13 @@ const displayPopularMoviesIntoDOM = movies => {
           <img
             src="${imageUrl}"
             class="card-img-top"
-            alt="${movie.title}"
+            alt="${movie.title}"  
           />
         </a>
         <div class="card-body">
           <h5 class="card-title">${movie.title}</h5>
           <p class="card-text">
-            <small class="text-muted">Lançamento: ${movie.release_date}</small>
+            <small class="text-muted">Lançamento: ${date}</small>
           </p>
       </div>
     </div>`
@@ -136,6 +138,9 @@ const insertMoviesDetailsIntoDom = movie => {
   
   containerBg.style.background = `url(${backdropImg}) no-repeat center center/cover`
   movieDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
+
+  let date = `${movie.release_date}`;
+  date = date.split("-").reverse().join("-");
   
   movieDetails.innerHTML = `
   <div class="details-top">
@@ -152,7 +157,7 @@ const insertMoviesDetailsIntoDom = movie => {
               <i class="fas fa-star text-primary"></i>
               ${movie.vote_average} / 10
             </p>
-            <p class="text-muted">Lançamento: ${movie.release_date}</p>
+            <p class="text-muted">Lançamento: ${date}</p>
             <p>
             ${overviewText}
             </p>
@@ -189,6 +194,9 @@ const displayPopularTvShowsIntoDOM = movies => {
   movies.forEach(show => {
     const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
 
+    let date = `${show.first_air_date}`;
+    date = date.split("-").reverse().join("-");
+
     popularShows.innerHTML += 
     `<div class="card">
       <a href="tv-details.html?id=${show.id}">
@@ -201,7 +209,7 @@ const displayPopularTvShowsIntoDOM = movies => {
       <div class="card-body">
         <h5 class="card-title">${show.name}</h5>
         <p class="card-text">
-          <small class="text-muted">Exibido: ${show.first_air_date}</small>
+          <small class="text-muted">Exibido: ${date}</small>
         </p>
       </div>
     </div>`
@@ -237,6 +245,13 @@ const insertShowDetailsIntoDom = show => {
   showBackground.style.background = `url(${backdropImg}) no-repeat center center/cover`
   showDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
 
+  let date = `${show.first_air_date}`;
+  date = date.split("-").reverse().join("-");
+
+  let lastEpisodeDate = `${show.last_episode_to_air.air_date}`;
+  lastEpisodeDate = lastEpisodeDate.split("-").reverse().join("-");
+
+  
   showDetails.innerHTML = `
     <div class="details-top">
       <div>
@@ -252,7 +267,7 @@ const insertShowDetailsIntoDom = show => {
           <i class="fas fa-star text-primary"></i>
           ${show.vote_average} / 10
         </p>
-        <p class="text-muted">Lançamento: ${show.first_air_date}</p>
+        <p class="text-muted">Lançamento: ${date}</p>
         <p>
         ${overviewText}
         </p>
@@ -268,7 +283,7 @@ const insertShowDetailsIntoDom = show => {
       <ul>
         <li><span class="text-secondary">Número de Episódios:</span> ${show.number_of_episodes}</li>
         <li>
-          <span class="text-secondary">Último episódio transmitido:</span> ${show.last_episode_to_air.air_date}
+          <span class="text-secondary">Último episódio transmitido:</span> ${lastEpisodeDate}
         </li>
         <li><span class="text-secondary">Status:</span> ${show.status}</li>
       </ul>
