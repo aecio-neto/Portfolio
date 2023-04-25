@@ -9,8 +9,6 @@ Dúvidas
 Bugs
   Slider não funciona ao inverso (primeiro item)
   Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between aplicada ao elemento pai. 
-  Detalhes Série/Filmes - como voltar para busca ou para a última página vista?
-    Isso funcionaria bem?
   Busca não indica nada quando não há resultados. 
 
 */
@@ -129,14 +127,14 @@ const fetchMovieDetails = async () => {
 
 const insertMoviesDetailsIntoDom = movie => {
   const containerBg = document.querySelector('#container-bg')
-  const movieDetails = document.querySelector('#movie-details');
+  const movieDetails = document.querySelector('#movie-details')
   const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
   const backdropImg = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
   const genresList = movie.genres.map(genre => `<li>${genre.name}</li>`).join('')
   const companiesList = movie.production_companies.map(company => company.name).join(', ')
   const overviewText = movie.overview && movie.overview !== "" ? movie.overview : "Sinopse indisponível"
   
-  containerBg.style.background = `url(${backdropImg}) no-repeat center center/cover`;
+  containerBg.style.background = `url(${backdropImg}) no-repeat center center/cover`
   movieDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
   
   movieDetails.innerHTML = `
@@ -224,7 +222,7 @@ const loadShowDetails = async () => {
 }
 
 const insertShowDetailsIntoDom = show => {
-  const showBackground = document.querySelector('#show-background');
+  const showBackground = document.querySelector('#show-background')
   const showDetails = document.querySelector('#show-details')
   const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
   const backdropImg = `https://image.tmdb.org/t/p/original/${show.backdrop_path}`
@@ -236,7 +234,7 @@ const insertShowDetailsIntoDom = show => {
   
   const siteBtnText = show.homepage === "" ? `Site indisponível` : `Site Oficial`
 
-  showBackground.style.background = `url(${backdropImg}) no-repeat center center/cover`;
+  showBackground.style.background = `url(${backdropImg}) no-repeat center center/cover`
   showDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
 
   showDetails.innerHTML = `
@@ -284,6 +282,16 @@ const searchMoviesOrShows = (e) => {
 
   const selectedRadio = document.querySelector('.search-radio input[type="radio"]:checked').value
   const querie = document.querySelector('#search-term').value
+  const searchTerm = document.querySelector('#search-term')
+  const searchError = document.querySelector('#search-error')
+
+  if (!searchTerm.value.trim()) {
+    searchError.value = 'Digite um termo de pesquisa válido.'
+    searchError.classList.add('alert')
+
+    setTimeout(() => searchError.remove(), 2000)
+    return
+  }
   
   searchForm.action = `
   /search.html?type=${encodeURIComponent(selectedRadio)}&search-term=${encodeURIComponent(querie)}`
@@ -350,6 +358,7 @@ const init = () => {
   } else if (path.includes(`/tv-details.html`)) {
     loadShowDetails()
   } else if (path.includes(`/search.html`)) {
+    searchForm.addEventListener('submit', searchMoviesOrShows)
     fetchSearchQuerie()
   }
 }
