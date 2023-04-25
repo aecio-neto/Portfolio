@@ -4,12 +4,10 @@ Dúvidas
   Como trabalhar com menos requests a cada inserção de dados/imagens?
   Como reduzir o uso do innerHTML? 
     -classes/ids no html e modificar o conteúdo a partir das consts? 
-  Como mudar o formato da data?
 
 Bugs
   Slider não funciona ao inverso (primeiro item)
   Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between aplicada ao elemento pai. 
-  Data invertida. 
 */
 
 const apiKey = `api_key=813d93e896605a2bcbd5b1ab9a618aac`
@@ -91,8 +89,8 @@ const displayPopularMoviesIntoDOM = movies => {
   console.log(movies)
 
   movies.forEach(movie => {
-    let date = `${movie.release_date}`;
-    date = date.split("-").reverse().join("-");
+    let date = `${movie.release_date}`
+    date = date.split("-").reverse().join("-")
     const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
     popularMovies.innerHTML += 
@@ -139,8 +137,8 @@ const insertMoviesDetailsIntoDom = movie => {
   containerBg.style.background = `url(${backdropImg}) no-repeat center center/cover`
   movieDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
 
-  let date = `${movie.release_date}`;
-  date = date.split("-").reverse().join("-");
+  let date = `${movie.release_date}`
+  date = date.split("-").reverse().join("-")
   
   movieDetails.innerHTML = `
   <div class="details-top">
@@ -194,8 +192,8 @@ const displayPopularTvShowsIntoDOM = movies => {
   movies.forEach(show => {
     const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
 
-    let date = `${show.first_air_date}`;
-    date = date.split("-").reverse().join("-");
+    let date = `${show.first_air_date}`
+    date = date.split("-").reverse().join("-")
 
     popularShows.innerHTML += 
     `<div class="card">
@@ -245,13 +243,12 @@ const insertShowDetailsIntoDom = show => {
   showBackground.style.background = `url(${backdropImg}) no-repeat center center/cover`
   showDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
 
-  let date = `${show.first_air_date}`;
-  date = date.split("-").reverse().join("-");
+  let date = `${show.first_air_date}`
+  date = date.split("-").reverse().join("-")
 
-  let lastEpisodeDate = `${show.last_episode_to_air.air_date}`;
-  lastEpisodeDate = lastEpisodeDate.split("-").reverse().join("-");
+  let lastEpisodeDate = `${show.last_episode_to_air.air_date}`
+  lastEpisodeDate = lastEpisodeDate.split("-").reverse().join("-")
 
-  
   showDetails.innerHTML = `
     <div class="details-top">
       <div>
