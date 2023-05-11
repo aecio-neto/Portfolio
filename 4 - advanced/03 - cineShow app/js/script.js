@@ -4,13 +4,14 @@ Dúvidas
   Como trabalhar com menos requests a cada inserção de dados/imagens?
   Como reduzir o uso do innerHTML? 
     -classes/ids no html e modificar o conteúdo a partir das consts? 
+  Como voltar da página de detalhes para a página de pesquisa com os últimos requests feitos?
 
 Bugs
   Slider não funciona ao inverso (primeiro item)
-  Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between aplicada ao elemento pai. 
+  Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between aplicada ao elemento pai. Foi resolvido com um texto padrão. 
 
 Próximos passos:
-  formatar a nota do filme
+  adicionar paginação na página de resultados de busca. 
 */
 
 const apiKey = `api_key=813d93e896605a2bcbd5b1ab9a618aac`
@@ -48,6 +49,7 @@ const fetchData = async (url, callback) => {
   try {
     const response = await fetch(url)
     const data = await response.json()
+    console.log(data)
 
     callback(data.results)
   } catch (error) {
@@ -92,7 +94,7 @@ const displayPopularMoviesIntoDOM = movies => {
 
   movies.forEach(movie => {
     let date = `${movie.release_date}`
-    date = date.split("-").reverse().join("-")
+    date = date.split("-").reverse().join("/")
     const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
     popularMovies.innerHTML += 
@@ -139,7 +141,7 @@ const insertMoviesDetailsIntoDom = movie => {
   movieDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
 
   let date = `${movie.release_date}`
-  date = date.split("-").reverse().join("-")
+  date = date.split("-").reverse().join("/")
   
   movieDetails.innerHTML = `
   <div class="details-top">
@@ -154,7 +156,7 @@ const insertMoviesDetailsIntoDom = movie => {
             <h2>${movie.title}</h2>
             <p>
               <i class="fas fa-star text-primary"></i>
-              ${movie.vote_average} / 10
+              ${movie.vote_average.toFixed(1)} / 10
             </p>
             <p class="text-muted">Lançamento: ${date}</p>
             <p>
@@ -194,7 +196,7 @@ const displayPopularTvShowsIntoDOM = movies => {
     const imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
 
     let date = `${show.first_air_date}`
-    date = date.split("-").reverse().join("-")
+    date = date.split("-").reverse().join("/")
 
     popularShows.innerHTML += 
     `<div class="card">
@@ -245,10 +247,10 @@ const insertShowDetailsIntoDom = show => {
   showDetails.style.backgroundColor = `rgba(0, 0, 0, 0.7)`
 
   let date = `${show.first_air_date}`
-  date = date.split("-").reverse().join("-")
+  date = date.split("-").reverse().join("/")
 
   let lastEpisodeDate = `${show.last_episode_to_air.air_date}`
-  lastEpisodeDate = lastEpisodeDate.split("-").reverse().join("-")
+  lastEpisodeDate = lastEpisodeDate.split("-").reverse().join("/")
 
   showDetails.innerHTML = `
     <div class="details-top">
@@ -263,7 +265,7 @@ const insertShowDetailsIntoDom = show => {
         <h2>${show.name}</h2>
         <p>
           <i class="fas fa-star text-primary"></i>
-          ${show.vote_average} / 10
+          ${show.vote_average.toFixed(1)} / 10
         </p>
         <p class="text-muted">Lançamento: ${date}</p>
         <p>
@@ -312,26 +314,144 @@ const searchMoviesOrShows = (e) => {
   searchForm.reset()
 }
 
-const fetchSearchQuerie = async () => {
+const fetchSearchQuerie = async (page = 1) => {
   const searchTerm = urlParams.get('search-term')
   const type = urlParams.get('type')
   const searchUrl = `
-  https://api.themoviedb.org/3/search/${type}?${apiKey}&language=pt-BR&query=${searchTerm}&page=1&include_adult=false`
-  
-  fetchData(searchUrl, insertSearchResultsIntoDom)
+  https://api.themoviedb.org/3/search/${type}?${apiKey}&language=pt-BR&query=${searchTerm}&page=${page}&include_adult=false`
+
+  const response = await fetch(searchUrl)
+  const data = await response.json()
+  insertSearchResultsIntoDom(data.results.slice(0, 20)) // Mostra apenas os resultados da página atual
 }
 
 const insertSearchResultsIntoDom = shows => {
   const showDetails = document.querySelector('#search-results')
   const type = urlParams.get('type')
-  
-  shows.forEach(show => {
+  const resultsPerPage = 20
+  let currentPage = 1
+  let totalResults = shows.total_results
+  let totalPages = Math.ceil(totalResults / resultsPerPage)
+
+  console.log(totalResults, totalPages);
+
+  const updatePagination = () => {
+
+    // botões dentro da função de atualizar em que página estamos
+    const pagination = document.querySelector('#pagination')
+    const prevButton = pagination.querySelector('#prev')
+    const nextButton = pagination.querySelector('#next')
+    const pageCounter = pagination.querySelector('.page-counter')
+
+    pageCounter.textContent = `Page ${currentPage} of ${totalPages}`
+    prevButton.disabled = currentPage === 1
+    nextButton.disabled = currentPage === totalPages
+  }
+
+  showDetails.innerHTML = '' // Limpa os resultados anteriores antes de inserir os novos resultados
+
+  shows.forEach((show, index) => {
     let imageUrl = ``
     let detailsLink = ``
     const title = show.name ? show.name : show.title
     let releaseDate = show.release_date ? show.release_date : show.first_air_date
 
-    releaseDate = releaseDate.split("-").reverse().join("-")    
+    releaseDate = releaseDate.split("-").reverse().join("/")    
+
+    if (show.poster_path === null) {
+      imageUrl = `images/no-image.jpg`
+    } else {
+      imageUrl = `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+    }
+
+    if (type === `tv`) {
+      detailsLink = `tv-details.html?id=${show.id}`
+    } else {
+      detailsLink = `movie-details.html?id=${show.id}`
+    }
+
+    showDetails.innerHTML += 
+    `<div class="card">
+      <a href="${detailsLink}">
+        <img src="${imageUrl}" class="card-img-top" alt="${title}" />
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">${title}</h5>
+        <p class="card-text">
+          <small class="text-muted">Lançamento: ${releaseDate}</small>
+        </p>
+      </div>
+      </div>`
+    })
+
+  updatePagination()
+
+  const pagination = document.querySelector('#pagination')
+  const prevButton = pagination.querySelector('#prev')
+  const nextButton = pagination.querySelector('#next')
+
+  prevButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--
+      showDetails.innerHTML = ''
+      insertSearchResultsIntoDom(shows)
+      updatePagination()
+    }
+  })
+
+  nextButton.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      currentPage++
+      showDetails.innerHTML = ''
+      insertSearchResultsIntoDom(shows)
+      updatePagination()
+    }
+  })
+}
+
+/* const fetchSearchQuerie = async (page = 1) => {
+  const searchTerm = urlParams.get('search-term')
+  const type = urlParams.get('type')
+  const searchUrl = `
+  https://api.themoviedb.org/3/search/${type}?${apiKey}&language=pt-BR&query=${searchTerm}&page=${page}1&include_adult=false`
+
+  
+  const response = await fetch(searchUrl)
+  const data = await response.json()
+  insertSearchResultsIntoDom()
+}
+
+const insertSearchResultsIntoDom = shows => {
+  const showDetails = document.querySelector('#search-results')
+  const type = urlParams.get('type')
+  const resultsPerPage = 20
+  let currentPage = 1
+  let totalResults = shows.total_results
+  let totalPages = Math.ceil(totalResults / resultsPerPage)
+  
+  console.log(totalResults, totalPages);
+  
+  const updatePagination = () => {
+    
+    // botões dentro da função de atualizar em que página estamos
+    const pagination = document.querySelector('#pagination')
+    const prevButton = pagination.querySelector('#prev')
+    const nextButton = pagination.querySelector('#next')
+    const pageCounter = pagination.querySelector('.page-counter')
+    
+    pageCounter.textContent = `Page ${currentPage} of ${totalPages}`
+    prevButton.disabled = currentPage === 1
+    nextButton.disabled = currentPage === totalPages
+  }
+  
+  showDetails.innerHTML = '';
+  shows.results.forEach((show, index) => {
+    let imageUrl = ``
+    let detailsLink = ``
+    const title = show.name ? show.name : show.title
+    let releaseDate = show.release_date ? show.release_date : show.first_air_date
+
+    releaseDate = releaseDate.split("-").reverse().join("/")    
     
     if (show.poster_path === null) {
       imageUrl = `images/no-image.jpg`
@@ -356,9 +476,33 @@ const insertSearchResultsIntoDom = shows => {
           <small class="text-muted">Lançamento: ${releaseDate}</small>
         </p>
       </div>
-    </div>`
+      </div>`
+    })
+    
+  updatePagination()
+  
+  const pagination = document.querySelector('#pagination')
+  const prevButton = pagination.querySelector('#prev')
+  const nextButton = pagination.querySelector('#next')
+
+  prevButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--
+      showDetails.innerHTML = ''
+      insertSearchResultsIntoDom(shows)
+      updatePagination()
+    }
   })
-}
+
+  nextButton.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      currentPage++
+      showDetails.innerHTML = ''
+      insertSearchResultsIntoDom(shows)
+      updatePagination()
+    }
+  })
+} */
 
 const init = () => {
   if (path === `/index.html`) {
