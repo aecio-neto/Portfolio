@@ -398,7 +398,6 @@ const init = () => {
     loadShowDetails()
   } else if (path.includes(`/search.html`)) {
     searchForm.addEventListener('submit', searchMoviesOrShows)
-    // fetchSearchQuerie()
     fetchSearchQuerie()
   }
 }
