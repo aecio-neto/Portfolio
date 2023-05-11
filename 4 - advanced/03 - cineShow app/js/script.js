@@ -1,19 +1,3 @@
-/* 
-Dúvidas 
-  Onde guardar as chaves das apis? 
-  Como trabalhar com menos requests a cada inserção de dados/imagens?
-  Como reduzir o uso do innerHTML? 
-    -classes/ids no html e modificar o conteúdo a partir das consts? 
-  Como voltar da página de detalhes para a página de pesquisa com os últimos requests feitos?
-
-Bugs
-  Slider não funciona ao inverso (primeiro item)
-  Se overview das séries/filmes estiver vazio, fica um buraco no meio da tela. Pois há uma propriedade de justify-content: space-between aplicada ao elemento pai. Foi resolvido com um texto padrão. 
-
-Próximos passos:
-  adicionar paginação na página de resultados de busca. 
-*/
-
 const apiKey = `api_key=813d93e896605a2bcbd5b1ab9a618aac`
 const searchForm = document.querySelector('.search-form')
 const path = window.location.pathname
@@ -24,18 +8,16 @@ const createSlide = () => {
     const swiper = new Swiper('.swiper', {
       direction: 'horizontal',
       loop: true,
+      spaceBetween: 30,
       breakpoints: { 
         320: {
           slidesPerView: 1,
-          spaceBetween: 20
         },
         480: {
           slidesPerView: 2,
-          spaceBetween: 30
         },
         960: { 
           slidesPerView: 4,
-          spaceBetween: 40
         },
       },
       navigation: {
@@ -49,8 +31,6 @@ const fetchData = async (url, callback) => {
   try {
     const response = await fetch(url)
     const data = await response.json()
-    console.log(data)
-
     callback(data.results)
   } catch (error) {
     console.error('Erro na chamada da API', error)
@@ -359,14 +339,13 @@ const fetchSearchQuerie = async (currentPage = 1) => {
   
   updatePagination(currentPage, totalPages)
   insertSearchResultsIntoDom(data.results)
-  console.log(totalResults, totalPages);
 }
 
 const insertSearchResultsIntoDom = shows => {
   const showDetails = document.querySelector('#search-results')
   const type = urlParams.get('type')
 
-  showDetails.innerHTML = '' // Limpa os resultados anteriores antes de inserir os novos resultados
+  showDetails.innerHTML = ''
 
   shows.forEach((show) => {
     let imageUrl = ``
