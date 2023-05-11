@@ -16,7 +16,7 @@ Apesar de fazer parte de um curso [Modern Javascript](https://www.traversymedia.
 ### Screeshot
 ![Desktop Version](images/print-desktop.png)
 ![Mobile Version](images/print-mobile.png)
-![Página Detalhes](images/details-page.png)
+![Página Detalhes](images/print-desktop-007%20details.png)
 ![Busca](images/print-search.png)
 
 ### Ferramentas utilizadas
