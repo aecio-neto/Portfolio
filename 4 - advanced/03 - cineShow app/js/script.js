@@ -385,7 +385,7 @@ const insertSearchResultsIntoDom = shows => {
 }
 
 const init = () => {
-  if (path === `/` || path === `/index.html`) {
+  if (location.pathname === '' || path === `/` || path === `/index.html`) {
     createSlide()
     fetchNowPlayingMovies()
     fetchPopularMovies()
