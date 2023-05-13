@@ -4,8 +4,6 @@ const path = window.location.pathname
 const urlParams = new URLSearchParams(window.location.search)
 const id = urlParams.get('id')
 
-console.log(path)
-
 const createSlide = () => {
     const swiper = new Swiper('.swiper', {
       direction: 'horizontal',
