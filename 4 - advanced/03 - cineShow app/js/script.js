@@ -4,6 +4,8 @@ const path = window.location.pathname
 const urlParams = new URLSearchParams(window.location.search)
 const id = urlParams.get('id')
 
+console.log(path)
+
 const createSlide = () => {
     const swiper = new Swiper('.swiper', {
       direction: 'horizontal',
@@ -385,7 +387,7 @@ const insertSearchResultsIntoDom = shows => {
 }
 
 const init = () => {
-  if (path === `/index.html` || path === `/`) {
+  if (path === `/` || path === `/index.html`) {
     createSlide()
     fetchNowPlayingMovies()
     fetchPopularMovies()
