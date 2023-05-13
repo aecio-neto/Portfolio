@@ -6,7 +6,7 @@ O aplicativo possui roteamento básico e controle de estado de alguns elementos.
 
 Embora ainda haja espaço para melhorias, estou satisfeito com o resultado inicial.
 
-[Ver ao Vivo](https://cineshow.netlify.app/)
+[Ver ao Vivo](https://cineshow.netlify.app/index.html)
 
 ### Recursos e Funcionalidades
 
