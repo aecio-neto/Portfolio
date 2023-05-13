@@ -45,5 +45,5 @@ Como resultado, pude aprimorar minhas habilidades de programação e me tornar m
 
 ### Onde me encontrar
 
-[Linkedin](https://www.linkedin.in/aecio-neto)
-[Site Pessoal - Aécio Neto](https://aecioneto.com.br)
+- [Linkedin](https://www.linkedin.in/aecio-neto)
+- [Site Pessoal - Aécio Neto](https://aecioneto.com.br)
