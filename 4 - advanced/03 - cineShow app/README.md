@@ -1,8 +1,12 @@
 ## CineShow app - Visão Geral
 
-Este é um aplicativo de entretenimento criado com JavaScript que permite aos usuários navegarem por diferentes seções de filmes, séries e programas de TV. O aplicativo utiliza a API The MovieDB para buscar informações sobre filmes e séries e criar as páginas do aplicativo a partir dessas informações.
+CineShow App - uma aplicação de entretenimento que permite aos usuários navegarem por diferentes filmes e séries usando a API The MovieDB. As páginas são construídas dinamicamente com base nas informações fornecidas pela API. Aprendi bastante durante o processo de desenvolvimento, desde como a API funciona até a implementação de funcionalidades e correção de bugs.
 
-Apesar de fazer parte de um curso [Modern Javascript](https://www.traversymedia.com/modern-javascript-2-0), fiz a aplicação sem seguir tutoriais. Aos poucos, aprendi sobre a API e implementei as funcionalidades básicas de uma versão inicial. 
+O aplicativo possui roteamento básico e controle de estado de alguns elementos. Ele inclui recursos como busca, exibição de filmes/séries em destaque, detalhes do filme/série e layout responsivo. As tecnologias usadas incluem The MovieDB API, a biblioteca JavaScript Swiper, HTML5, CSS3 e JavaScript.
+
+Embora ainda haja espaço para melhorias, estou satisfeito com o resultado inicial.
+
+[Ver ao Vivo](https://cineshow.netlify.app/)
 
 ### Recursos e Funcionalidades
 
