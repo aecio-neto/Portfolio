@@ -43,7 +43,7 @@ Como resultado, pude aprimorar minhas habilidades de programação e me tornar m
 - Organizar o código JavaScript em módulos para tornar o desenvolvimento mais eficiente e fácil de gerenciar.
 - Estudar e implementar funcionalidades que facilitem a vida do usuário
 
-### Sobre
+### Onde me encontrar
 
-- Website - [Aécio Neto](https://aecioneto.com.br)
-- Linkedin - [@aecio-neto](https://www.linkedin.in/aecio-neto)
+[Linkedin](https://www.linkedin.in/aecio-neto)
+[Site Pessoal - Aécio Neto](https://aecioneto.com.br)
