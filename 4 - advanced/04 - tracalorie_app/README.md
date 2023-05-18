@@ -1,4 +1,4 @@
-# Trackcalorie APP
+# Track Calorie APP
 
 "Track Calorie" é uma aplicação que permite aos usuários monitorar suas calorias consumidas em um dia. O projeto está na fase inicial de desenovlvimento. 
 
