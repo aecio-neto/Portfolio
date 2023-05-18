@@ -11,5 +11,5 @@ Vamos ver como ficará o resultado final.
 
 ## Onde me encontrar
 
-[Site Pessoal](https://www.aecioneto.com.br)
-[Linkedin](https://www.linkedin.com/in/aecio-neto)
+- [Site Pessoal](https://www.aecioneto.com.br)
+- [Linkedin](https://www.linkedin.com/in/aecio-neto)
