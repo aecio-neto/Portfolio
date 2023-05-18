@@ -1,7 +1,6 @@
 # Track Calorie APP
 
-"Track Calorie" é uma aplicação que permite aos usuários monitorar suas calorias consumidas em um dia. O projeto está na fase inicial de desenovlvimento. 
-
+"Track Calorie" é uma aplicação que permite aos usuários monitorar suas calorias consumidas em um dia. O projeto está na fase inicial de desenvolvimento. 
 
 É a primeira vez que vou desenvolver aplicando o conceito de programação orientada a objetos. Cada parte da aplicação será representada por classes, onde poderei definir propriedades e métodos para manipular os dados e calcular as informações necessárias.
 
