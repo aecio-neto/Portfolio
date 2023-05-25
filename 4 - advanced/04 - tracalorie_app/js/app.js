@@ -4,11 +4,11 @@
 
 - setDailyLimit()
 - resetDay
--- Será um método de qual classe? CalorieTracker? UdtateUI? InfoPanel? 
+-- Será um método de qual classe? CalorieTracker? UdtateUI? InfoPanel?
+
 */
 
 // Da início à execução do programa, define os listeners, integra as classes/métodos
-
 class App {
   constructor() {
     this.calorieTracker = new CalorieTracker()
@@ -32,17 +32,23 @@ class App {
       this.infoPanel.updateDailyLimit(newLimit)
     })
 
-    // Evento para resetar o dia
-    // this.resetDayButton.addEventListener('click', () => {
-    //   this.calorieTracker.resetDay()
-    //   this.updateUI()
-    // })
+    // Reseta o balanço de calorias diário
+    this.resetDayButton = document.querySelector('#reset')
+    this.resetDayButton.addEventListener('click', () => {
+      this.calorieTracker.resetDay()
+      console.log('resetDayButton pressionado')
+      this.infoPanel.updateUI(
+        this.calorieTracker.caloriesConsumed,
+        this.calorieTracker.caloriesSpent)
+    })
   }
 }
 
 class CalorieTracker {
-  constructor(dailyLimit) {
+  constructor(dailyLimit, caloriesConsumed, caloriesSpent) {
     this.dailyLimit = 0
+    this.caloriesConsumed = 0
+    this.caloriesSpent = 0
   }
 
   setDailyLimit(newLimit) {
@@ -50,10 +56,17 @@ class CalorieTracker {
     if (!isNaN(newLimit) && newLimit > 0) {
       this.dailyLimit = parseInt(newLimit)
       console.log('CalorieTracker método: setDailiLimit() funcionando')
-      // this.updateUI.updateDailyLimit(newLimit)
+      this.updateUI.updateDailyLimit(newLimit)
     } else {
       console.log('Informe um limite diário válido!')
     }
+  }
+
+  // vai zerar as consumidas e queimadas. 
+  resetDay() {
+    this.caloriesConsumed = 0
+    this.caloriesSpent = 0
+    console.log('resetDay CalorieTracker: disparado')
   }
 }
 
@@ -61,17 +74,20 @@ class CalorieTracker {
 class InfoPanel {
   constructor() {
     this.dailyLimitElement = document.querySelector('#calories-limit')
+    this.caloriesConsumedElement = document.querySelector('#calories-consumed')
+    this.caloriesSpentElement = document.querySelector('#calories-spent')
+    this.totalCaloriesElement = document.querySelector('#total-calories')
+  }
 
+  updateUI(caloriesConsumed, caloriesSpent) {
+    this.caloriesConsumedElement.textContent = caloriesConsumed
+    this.caloriesSpentElement.textContent = caloriesSpent
+    // this.totalCaloriesElement.textContent = totalCalories
   }
 
   updateDailyLimit(newLimit) {
     this.dailyLimitElement.textContent = newLimit
     console.log('updateDailyLimit do InfoPanel: ativo')
-  }
-
-  updateUI(dailyLimit, caloriesConsumed, caloriesSpent, totalCalories) {
-    this.dailyLimitElement.textContent = dailyLimit
-
   }
 
 }
