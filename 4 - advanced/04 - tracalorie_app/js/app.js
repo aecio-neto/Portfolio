@@ -1,5 +1,5 @@
 /* O que preciso fazer? 
-- configurar as buscas
+- configurar as buscas - feito
 - consertar o resetDay
 - implementar localStorage
 */
@@ -9,8 +9,8 @@ class App {
   constructor() {
     this.calorieTracker = new CalorieTracker()
     this.infoPanel = new InfoPanel()
-    this.mealPanel = new MealPanel(this.calorieTracker, () => this.updateUI())
-    this.workoutPanel = new WorkoutPanel(this.calorieTracker, () => this.updateUI())
+    this.mealsPanel = new MealsPanel(this.calorieTracker, () => this.updateUI())
+    this.workoutsPanel = new WorkoutsPaneld(this.calorieTracker, () => this.updateUI())
   }
   
   start() {
@@ -52,7 +52,7 @@ class App {
 
       if (mealName && mealCalories) {
         const meal = new Meal(mealName, mealCalories)
-        this.mealPanel.addMeal(meal)
+        this.mealsPanel.addMeal(meal)
         this.calorieTracker.addCaloriesConsumed(mealCalories)
         this.updateUI()
       }
@@ -67,10 +67,22 @@ class App {
 
       if (workoutName && workoutCalories) {
         const workout = new Workout(workoutName, workoutCalories)
-        this.workoutPanel.addWorkout(workout)
+        this.workoutsPanel.addWorkout(workout)
         this.calorieTracker.addCaloriesSpent(workoutCalories)
         this.updateUI()
       }
+    })
+
+    const filterMealsInput = document.querySelector('#filter-meals')
+    filterMealsInput.addEventListener('input', () => {
+      const searchTerm = filterMealsInput.value.trim()
+      this.mealsPanel.filterMeals(searchTerm)
+    })
+
+    const filterWorkoutInput = document.querySelector('#filter-workouts')
+    filterWorkoutInput.addEventListener('input', () => {
+      const searchTerm = filterWorkoutInput.value.trim()
+      this.workoutsPanel.filterWorkouts(searchTerm)
     })
   }
 }
@@ -178,7 +190,7 @@ class InfoPanel {
   }
 }
 
-class MealPanel {
+class MealsPanel {
   constructor(calorieTracker, updateUI) {
     this.meals = []
     this.mealsItems = document.querySelector('#meal-items')
@@ -226,6 +238,19 @@ class MealPanel {
 
     meal.setElement(mealItem)
   }
+
+  filterMeals(searchTerm) {
+    this.meals.forEach(meal => {
+      console.log(meal)
+      const mealItem = meal.element
+      console.log(mealItem)
+      if (meal.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+        mealItem.classList.remove('d-none');
+      } else {
+        mealItem.classList.add('d-none');
+      }
+    })
+  }
 }
 
 class Meal {
@@ -245,7 +270,7 @@ class Meal {
 }
 
 // Controla a inserção e remoção dos workouts
-class WorkoutPanel {
+class WorkoutsPaneld {
   constructor(calorieTracker, updateUI) {
     this.workouts = []
     this.workoutsItems = document.querySelector('#workout-items')
@@ -292,6 +317,19 @@ class WorkoutPanel {
     })
 
     workout.setElement(workoutItem)
+  }
+
+  filterWorkouts(searchTerm) {
+    this.workouts.forEach(workout => {
+      console.log(workout)
+      const workoutItem = workout.element
+      console.log(workoutItem)
+      if (workout.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+        workoutItem.classList.remove('d-none');
+      } else {
+        workoutItem.classList.add('d-none');
+      }
+    })
   }
 }
 
