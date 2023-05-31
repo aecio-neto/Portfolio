@@ -1,5 +1,4 @@
 /* O que preciso fazer? 
-- configurar as buscas - feito
 - consertar o resetDay
 - implementar localStorage
 */
@@ -39,6 +38,8 @@ class App {
     this.resetDayButton = document.querySelector('#reset')
     this.resetDayButton.addEventListener('click', () => {
       this.calorieTracker.resetDay()
+      this.mealsPanel.clearMeals()
+      this.workoutsPanel.clearWorkouts()
       this.updateUI()
     })
 
@@ -239,11 +240,16 @@ class MealsPanel {
     meal.setElement(mealItem)
   }
 
+  clearMeals() {
+    this.meals.forEach(meal => {
+      meal.removeElement()
+    })
+    this.meals = []
+  }
+
   filterMeals(searchTerm) {
     this.meals.forEach(meal => {
-      console.log(meal)
       const mealItem = meal.element
-      console.log(mealItem)
       if (meal.name.toLowerCase().includes(searchTerm.toLowerCase())) {
         mealItem.classList.remove('d-none');
       } else {
@@ -319,11 +325,16 @@ class WorkoutsPaneld {
     workout.setElement(workoutItem)
   }
 
+  clearWorkouts() {
+    this.workouts.forEach(workout => {
+      workout.removeElement()
+    })
+    this.workouts = []
+  }
+
   filterWorkouts(searchTerm) {
     this.workouts.forEach(workout => {
-      console.log(workout)
       const workoutItem = workout.element
-      console.log(workoutItem)
       if (workout.name.toLowerCase().includes(searchTerm.toLowerCase())) {
         workoutItem.classList.remove('d-none');
       } else {
