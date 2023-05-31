@@ -1,5 +1,5 @@
 /* O que preciso fazer? 
-- consertar o resetDay
+- consertar o resetDay - ok
 - implementar localStorage
 */
 
@@ -14,6 +14,13 @@ class App {
   
   start() {
     this.setupEventListeners()
+    const savedDailyLimit = localStorage.getItem('dailyLimit')
+    if (savedDailyLimit) {
+      this.calorieTracker.setDailyLimit(parseInt(savedDailyLimit))
+      this.infoPanel.updateDailyLimit(savedDailyLimit)
+    }
+    this.mealsPanel.loadMealsFromLocalStorage()
+    this.workoutsPanel.loadWorkoutsFromLocalStorage()
     this.updateUI()
   }
 
@@ -90,41 +97,50 @@ class App {
 
 class CalorieTracker {
   constructor(dailyLimit, caloriesConsumed, caloriesSpent) {
-    this.dailyLimit = 2000 
+    this.dailyLimit = 2000
     this.caloriesConsumed = 0
     this.caloriesSpent = 0
+    this.loadFromLocalStorage()
   }
 
   setDailyLimit(newLimit) {
     if (!isNaN(newLimit) && newLimit > 0) {
       this.dailyLimit = parseInt(newLimit)
+      this.saveToLocalStorage()
     } else {
+      console.log('Informe um valor de calorias válido!')
     }
   }
 
   resetDay() {
     this.caloriesConsumed = 0
     this.caloriesSpent = 0
+    this.saveToLocalStorage()
   }
 
 
   addCaloriesConsumed(calories) {
     if (!isNaN(calories) && calories > 0) {
       this.caloriesConsumed += parseInt(calories)
+      this.saveToLocalStorage()
     } else {
+      console.log('Informe um valor de calorias válido!')
     }
   }
 
   removeCaloriesConsumed(calories) {
     if (!isNaN(calories) && calories > 0) {
       this.caloriesConsumed -= parseInt(calories)
+      this.saveToLocalStorage()
     } else {
+      console.log('Informe um valor de calorias válido!')
     }
   }
 
   addCaloriesSpent(calories) {
     if (!isNaN(calories) && calories > 0) {
       this.caloriesSpent += parseInt(calories)
+      this.saveToLocalStorage()
     } else {
       console.log('Informe um valor de calorias válido!')
     }
@@ -132,9 +148,8 @@ class CalorieTracker {
 
   removeCaloriesSpent(calories) {
     if (!isNaN(calories) && calories > 0) {
-      console.log(`calores gastas antes removeCaloriesSpent: ${this.caloriesSpent}`);
       this.caloriesSpent -= parseInt(calories)
-      console.log(`calorias gastas depois removeCaloriesSpent: ${this.caloriesSpent}`);
+      this.saveToLocalStorage()
     } else {
       console.log('Informe um valor de calorias válido!')
     }
@@ -146,6 +161,25 @@ class CalorieTracker {
 
   getCaloriesRemaining() {
     return this.dailyLimit + this.caloriesSpent - this.caloriesConsumed
+  }
+
+  saveToLocalStorage() {
+    const data = {
+      dailyLimit: this.dailyLimit,
+      caloriesConsumed: this.caloriesConsumed,
+      caloriesSpent: this.caloriesSpent
+    }
+    localStorage.setItem('calorieTrackerData', JSON.stringify(data))
+  }
+
+  loadFromLocalStorage() {
+    const data = localStorage.getItem('calorieTrackerData')
+    if (data) {
+      const parsedData = JSON.parse(data)
+      this.dailyLimit = parsedData.dailyLimit
+      this.caloriesConsumed = parsedData.caloriesConsumed
+      this.caloriesSpent = parsedData.caloriesSpent
+    }
   }
 }
 
@@ -169,6 +203,7 @@ class InfoPanel {
 
   updateDailyLimit(newLimit) {
     this.dailyLimitEl.textContent = newLimit
+    localStorage.setItem('dailyLimit', newLimit)
   }
   
   getCaloriesBalance(caloriesConsumed, caloriesSpent) {
@@ -202,6 +237,7 @@ class MealsPanel {
   addMeal(meal) {
     this.meals.push(meal)
     this.renderMeal(meal)
+    this.saveMealsToLocalStorage()
   }
 
   removeMeal(meal) {
@@ -210,6 +246,7 @@ class MealsPanel {
       this.meals.splice(index, 1)
       meal.removeElement()
       this.calorieTracker.removeCaloriesConsumed(meal.calories) // Remover as calorias da refeição removida
+      this.saveMealsToLocalStorage()
       this.updateUI()
     }
   }
@@ -221,8 +258,8 @@ class MealsPanel {
       <div class="card-body">
         <div class="d-flex align-items-center justify-content-between">
           <h4 class="mx-1">${meal.name}</h4>
-          <div class="fs-1 bg-primary text-white text-center rounded-2 px-2 px-sm-5">
-            ${meal.calories}
+          <div class="fs-4 bg-primary text-white text-center rounded-2 px-2 px-sm-5">
+            ${meal.calories} cal
           </div>
           <button class="remove-meal btn btn-danger btn-sm mx-2">
             <i class="fa-solid fa-xmark"></i>
@@ -240,11 +277,25 @@ class MealsPanel {
     meal.setElement(mealItem)
   }
 
+  saveMealsToLocalStorage() {
+    localStorage.setItem('meals', JSON.stringify(this.meals))
+  }
+
+  loadMealsFromLocalStorage() {
+    const mealsData = localStorage.getItem('meals')
+    if (mealsData) {
+      const parsedData = JSON.parse(mealsData)
+      this.meals = parsedData.map(meal => new Meal(meal.name, meal.calories))
+      this.meals.forEach(meal => this.renderMeal(meal))
+    }
+  }
+
   clearMeals() {
     this.meals.forEach(meal => {
       meal.removeElement()
     })
     this.meals = []
+    this.saveMealsToLocalStorage()
   }
 
   filterMeals(searchTerm) {
@@ -287,6 +338,7 @@ class WorkoutsPaneld {
   addWorkout(workout) {
     this.workouts.push(workout)
     this.renderWorkout(workout)
+    this.saveWorkoutsToLocalStorage()
   }
 
   removeWorkout(workout) {
@@ -296,6 +348,7 @@ class WorkoutsPaneld {
       workout.removeElement()
       this.calorieTracker.removeCaloriesSpent(Number(workout.calories)) // Remover as calorias do treino feito
       this.updateUI()
+      this.saveWorkoutsToLocalStorage()
     }
   }
 
@@ -306,8 +359,8 @@ class WorkoutsPaneld {
       <div class="card-body">
         <div class="d-flex align-items-center justify-content-between">
           <h4 class="mx-1">${workout.name}</h4>
-          <div class="fs-1 bg-primary text-white text-center rounded-2 px-2 px-sm-5">
-            ${workout.calories}
+          <div class="fs-4 bg-primary text-white text-center rounded-2 px-2 px-sm-5">
+            ${workout.calories} cal
           </div>
           <button class="remove-workout btn btn-danger btn-sm mx-2">
             <i class="fa-solid fa-xmark"></i>
@@ -325,11 +378,25 @@ class WorkoutsPaneld {
     workout.setElement(workoutItem)
   }
 
+  saveWorkoutsToLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.workouts))
+  }
+
+  loadWorkoutsFromLocalStorage() {
+    const workoutsData = localStorage.getItem('workouts')
+    if (workoutsData) {
+      const parsedData = JSON.parse(workoutsData)
+      this.workouts = parsedData.map(workout => new Workout(workout.name, workout.calories))
+      this.workouts.forEach(workout => this.renderWorkout(workout))
+    }
+  }
+
   clearWorkouts() {
     this.workouts.forEach(workout => {
       workout.removeElement()
     })
     this.workouts = []
+    this.saveWorkoutsToLocalStorage()
   }
 
   filterWorkouts(searchTerm) {
