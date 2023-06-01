@@ -9,7 +9,7 @@ Embora a aplicação faça parte de um curso, decidi assumir a responsabilidade 
 
 Abaixo você pode ver como ficou resultado final. 
 
-[Ver ao vivo](https://aecio-trackcalorie.netlify.app/)
+<a href="https://aecio-trackcalorie.netlify.app/" target="_blank">Ver ao vivo</a>
 
 ### Capturas de Tela
 
