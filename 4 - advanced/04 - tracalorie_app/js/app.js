@@ -1,9 +1,3 @@
-/* O que preciso fazer? 
-- consertar o resetDay - ok
-- implementar localStorage
-*/
-
-// Da início à execução do programa, define os listeners, integra as classes/métodos
 class App {
   constructor() {
     this.calorieTracker = new CalorieTracker()
@@ -29,7 +23,6 @@ class App {
     this.infoPanel.updateUI(dailyLimit, caloriesConsumed, caloriesSpent)
   }
 
-  // Configura os listeners e a interação com usuário 
   setupEventListeners() {
     this.setDailyLimitButton = document.querySelector("#limit-form")
     this.setDailyLimitButton.addEventListener('submit', e => {
@@ -41,7 +34,6 @@ class App {
       this.updateUI()
     })
 
-    // Reseta o balanço de calorias diário
     this.resetDayButton = document.querySelector('#reset')
     this.resetDayButton.addEventListener('click', () => {
       this.calorieTracker.resetDay()
@@ -50,7 +42,6 @@ class App {
       this.updateUI()
     })
 
-    // Atualiza as calorias com base nas meals inseridas
     const addMealform = document.querySelector('#meal-form')
     addMealform.addEventListener('submit', e => {
       e.preventDefault()
@@ -117,7 +108,6 @@ class CalorieTracker {
     this.caloriesSpent = 0
     this.saveToLocalStorage()
   }
-
 
   addCaloriesConsumed(calories) {
     if (!isNaN(calories) && calories > 0) {
@@ -326,7 +316,6 @@ class Meal {
   }
 }
 
-// Controla a inserção e remoção dos workouts
 class WorkoutsPaneld {
   constructor(calorieTracker, updateUI) {
     this.workouts = []
