@@ -39,6 +39,7 @@ Embora o projeto esteja "concluído", reconheço que sempre há espaço para apr
 - [Relato 4](https://www.linkedin.com/posts/aecio-neto_desenvolvimento-javascript-poo-activity-7068239446919249920-c665?utm_source=share&utm_medium=member_desktop)
 - [Relato 5](https://www.linkedin.com/posts/aecio-neto_vamo-activity-7069338689176281088-eR6K?utm_source=share&utm_medium=member_desktop)
 - [Relato 6](https://www.linkedin.com/posts/aecio-neto_bora-activity-7069780264431853568-Qk3I?utm_source=share&utm_medium=member_desktop)
+- [Relato 7](https://www.linkedin.com/posts/aecio-neto_vamo-activity-7070031528080121857-PsV2?utm_source=share&utm_medium=member_desktop)
 
 ### Recursos úteis
 
