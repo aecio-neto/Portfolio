@@ -48,11 +48,17 @@ class App {
 
       const mealName = document.querySelector('#meal-name').value
       const mealCalories = document.querySelector('#meal-calories').value
+      
+      const collapseMeal =  document.querySelector('#collapse-meal')
+      const bsCollapse = new bootstrap.Collapse(collapseMeal, {
+        toggle: true,
+      })
 
       if (mealName && mealCalories) {
         const meal = new Meal(mealName, mealCalories)
         this.mealsPanel.addMeal(meal)
         this.calorieTracker.addCaloriesConsumed(mealCalories)
+        
         this.updateUI()
       }
     })
@@ -63,6 +69,10 @@ class App {
 
       const workoutName = document.querySelector('#workout-name').value
       const workoutCalories = document.querySelector('#workout-calories').value
+      const collapseWorkout =  document.querySelector('#collapse-workout')
+      const bsCollapse = new bootstrap.Collapse(collapseWorkout, {
+        toggle: true,
+      })
 
       if (workoutName && workoutCalories) {
         const workout = new Workout(workoutName, workoutCalories)
